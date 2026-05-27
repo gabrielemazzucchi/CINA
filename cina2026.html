@@ -368,7 +368,23 @@ body {
 .nav-tab.active { color: var(--accent); }
 .nav-icon { font-size: 20px; line-height: 1; }
 
-
+/* ══════════════════════════════════════
+   INSTALL BANNER
+══════════════════════════════════════ */
+.install-banner {
+  margin: 0 20px 16px;
+  padding: 12px 14px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(201,169,110,0.25);
+  border-radius: var(--radius-sm);
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.install-icon { font-size: 18px; flex-shrink: 0; }
+.install-text { font-size: 12px; color: rgba(201,169,110,0.9); line-height: 1.6; }
+.install-close {
+  margin-left: auto; font-size: 16px;
+  color: var(--accent); cursor: pointer; flex-shrink: 0; padding: 0 2px;
+}
 </style>
 </head>
 <body>
@@ -409,10 +425,16 @@ body {
     <span class="route-city">Pechino</span><span class="route-arrow">🚄</span>
     <span class="route-city">Xi'an</span><span class="route-arrow">🚄</span>
     <span class="route-city">Chengdu</span><span class="route-arrow">✈</span>
-    <span class="route-city">Zhangjiajie</span><span class="route-arrow">🚄</span>
+    <span class="route-city">Zhangjiajie</span><span class="route-arrow">✈</span>
     <span class="route-city">Hangzhou</span><span class="route-arrow">🚄</span>
     <span class="route-city">Shanghai</span><span class="route-arrow">✈</span>
     <span class="route-city">MXP</span>
+  </div>
+
+  <div id="install-banner" class="install-banner">
+    <span class="install-icon">📲</span>
+    <span class="install-text"><b>Installa sull'iPhone:</b> tocca <b>Condividi</b> → <b>Aggiungi a Home</b> per usarla come app, anche offline.</span>
+    <span class="install-close" onclick="document.getElementById('install-banner').style.display='none'">×</span>
   </div>
 
   <div class="section-label">Seleziona una tappa</div>
@@ -925,7 +947,7 @@ const CITIES = {
           { time: 'Mattina alt.', label: 'Alternativa: Tianzi Mountain nord', note: 'Sezione meno turistica, ugualmente panoramica. Raggiungibile in navetta.' },
           { time: 'Pranzo', label: 'Pranzo in zona Baofeng Lake', note: 'Ristoranti locali più semplici e autentici rispetto all\'interno del parco principale.' },
           { time: 'Pomeriggio', label: 'Baofeng Lake — giro in barca 🚣', note: 'Lago verde smeraldo circondato da colonne altissime. Barche a remi nel silenzio tra le pareti rocciose. Il momento più meditativo del viaggio. ~45 minuti.' },
-          { time: 'Sera', label: 'Ultima sera a Zhangjiajie — bagagli', note: 'Comprate tè selvatico locale e erbe medicinali — ottimi regali. Domani il treno parte alle 07:28 — bagagli pronti stanotte.' },
+          { time: 'Sera', label: 'Ultima sera a Zhangjiajie — bagagli', note: 'Comprate tè selvatico locale e erbe medicinali — ottimi regali. Domani mattina volo per Hangzhou.' },
         ],
         tip: { title: 'Perché il lago è verde?', text: 'Il colore smeraldo è causato da alghe microscopiche e dalla riflessione della luce attraverso acqua pura di montagna ricca di minerali. L\'effetto è più intenso nelle giornate soleggiate di estate.' }
       },
@@ -937,12 +959,12 @@ const CITIES = {
     days: [
       {
         label: '6 ago', badge: 'Trasferimento', badgeKind: 'travel',
-        title: 'Treno per Hangzhou — Lago Ovest',
+        title: 'Volo per Hangzhou — Lago Ovest',
         date: 'Giovedì 6 agosto',
         intro: 'Marco Polo la definì "la città più nobile e magnifica del mondo". Il Lago Ovest — UNESCO dal 2011 — mantiene intatta quella magia dopo 700 anni.',
         slots: [
-          { time: '07:28', label: 'Treno Zhangjiajie → Hangzhou (8 ore)', note: 'Partenza puntuale — preparate i bagagli la sera prima. I treni cinesi sono comodi e puntuali: sedili ampi, vagone ristorante, paesaggi che cambiano dalle montagne Hunan alle pianure dello Zhejiang.' },
-          { time: '15:30', label: 'Arrivo a Hangzhou — transfer e check-in', note: 'Hotel entro 10 minuti a piedi dal lago. Zona Nanshan Road con vista.' },
+          { time: 'Mattina', label: 'Volo Zhangjiajie DYG → Hangzhou HGH (2 ore)', note: 'Arrivate con 2 ore di anticipo — aeroporto piccolo ma con controlli approfonditi.' },
+          { time: 'Arrivo', label: 'Transfer e check-in vicino al Lago Ovest', note: 'Hotel entro 10 minuti a piedi dal lago. Zona Nanshan Road con vista.' },
           { time: 'Pomeriggio', label: 'Prima passeggiata sul Lago Ovest (Xi Hu)', note: '6,5 km² circondati da colline, pagode, templi. Bai Causeway e Su Causeway le passeggiate storiche. Barca verso l\'Isola di Xiaoyingzhou consigliata.' },
           { time: 'Sera', label: 'Tramonto sul lago e cena', note: 'Dongpo Rou: maiale brasato nel vino di riso per 4 ore — inventato dal poeta Su Dongpo nell\'XI secolo. Il piatto simbolo di Hangzhou.' },
         ],
