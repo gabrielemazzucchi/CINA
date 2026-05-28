@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cina 2026">
+<meta name="theme-color" content="#0d0f14">
+<title>Cina 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0f14;
+  --surface: #13161d;
+  --surface2: #1c2030;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #e8e4dc;
+  --muted: #6b6e7a;
+  --accent: #c9a96e;
+  --accent-dim: rgba(201,169,110,0.15);
+  --blue: #8eb4d4;
+  --blue-dim: rgba(142,180,212,0.12);
+  --green: #6db888;
+  --green-dim: rgba(109,184,136,0.12);
+  --orange: #e8924a;
+  --orange-dim: rgba(232,146,74,0.12);
+  --purple: #9b87c4;
+  --purple-dim: rgba(155,135,196,0.12);
+  --red: #d4766a;
+  --red-dim: rgba(212,118,106,0.12);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── VIEWS ── */
+.view { display: none; min-height: 100dvh; }
+.view.active { display: block; }
+
+/* ── STATUS BAR SPACER ── */
+.status-bar { height: calc(var(--safe-top) + 8px); }
+
+/* ══════════════════════════════════════
+   HOME VIEW
+══════════════════════════════════════ */
+#view-home {
+  background: var(--bg);
+  padding-bottom: calc(var(--safe-bottom) + 16px);
+}
+
+.home-hero {
+  position: relative;
+  padding: calc(var(--safe-top) + 32px) 20px 28px;
+  overflow: hidden;
+}
+.home-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 0%, rgba(201,169,110,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 38px; font-weight: 400;
+  line-height: 1.1; color: var(--text);
+  margin-bottom: 6px;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  font-size: 13px; color: var(--muted);
+  line-height: 1.5; margin-bottom: 20px;
+}
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+.stat-val { font-size: 20px; font-weight: 500; color: var(--text); }
+.stat-lbl { font-size: 10px; color: var(--muted); margin-top: 1px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+.route-strip {
+  margin: 0 20px 24px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
+}
+.route-city { font-size: 12px; font-weight: 500; color: var(--text); }
+.route-arrow { font-size: 10px; color: var(--accent); }
+
+.section-label {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); padding: 0 20px; margin-bottom: 10px;
+}
+
+.city-cards { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+
+.city-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  -webkit-user-select: none;
+}
+.city-card:active { background: var(--surface2); border-color: var(--border2); }
+
+.city-card-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.city-card-body { flex: 1; min-width: 0; }
+.city-card-name { font-size: 16px; font-weight: 500; color: var(--text); }
+.city-card-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.city-card-nights {
+  font-size: 11px; font-weight: 500;
+  padding: 3px 8px; border-radius: 20px;
+  background: var(--accent-dim); color: var(--accent);
+  white-space: nowrap; flex-shrink: 0;
+}
+.city-card-arrow { color: var(--muted); font-size: 14px; flex-shrink: 0; }
+
+.note-card {
+  margin: 16px 20px 0;
+  padding: 14px;
+  background: var(--blue-dim);
+  border: 1px solid rgba(142,180,212,0.2);
+  border-radius: var(--radius-sm);
+}
+.note-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 5px; }
+.note-text { font-size: 12px; color: rgba(142,180,212,0.9); line-height: 1.6; }
+
+/* ══════════════════════════════════════
+   CITY VIEW
+══════════════════════════════════════ */
+#view-city {
+  padding-bottom: calc(var(--safe-bottom) + 80px);
+}
+
+.city-topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(13,15,20,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: calc(var(--safe-top) + 10px) 20px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.back-btn {
+  width: 36px; height: 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0;
+  font-size: 16px; color: var(--text);
+  transition: background 0.15s;
+}
+.back-btn:active { background: var(--surface2); }
+.topbar-info { flex: 1; min-width: 0; }
+.topbar-city { font-size: 16px; font-weight: 500; color: var(--text); }
+.topbar-dates { font-size: 11px; color: var(--muted); }
+
+/* Day nav pills */
+.day-nav-wrap {
+  padding: 12px 20px;
+  overflow-x: auto; scrollbar-width: none;
+  display: flex; gap: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.day-nav-wrap::-webkit-scrollbar { display: none; }
+.day-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px; font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  transition: all 0.15s; flex-shrink: 0;
+}
+.day-pill.active {
+  background: var(--accent);
+  color: #1a120a;
+  border-color: var(--accent);
+}
+
+/* Day content */
+.day-content { display: none; padding: 16px 20px; }
+.day-content.active { display: block; animation: fadeUp 0.2s ease; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.day-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px;
+  margin-bottom: 8px;
+}
+.badge-travel { background: var(--orange-dim); color: var(--orange); }
+.badge-full   { background: var(--green-dim);  color: var(--green); }
+.badge-arrival{ background: var(--blue-dim);   color: var(--blue); }
+.badge-show   { background: var(--purple-dim); color: var(--purple); }
+.badge-return { background: var(--red-dim);    color: var(--red); }
+
+.day-title {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 400;
+  line-height: 1.2; color: var(--text);
+  margin-bottom: 4px;
+}
+.day-date { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+
+.day-intro {
+  font-size: 13px; color: rgba(232,228,220,0.7);
+  line-height: 1.65; margin-bottom: 16px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--accent);
+}
+
+/* Timeline */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 18px; top: 8px; bottom: 8px;
+  width: 1px; background: var(--border2);
+}
+.tl-item { display: flex; gap: 14px; margin-bottom: 16px; position: relative; }
+.tl-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%; flex-shrink: 0;
+  margin-top: 4px; z-index: 1;
+  border: 2px solid var(--accent);
+  background: var(--bg);
+}
+.tl-time-col { width: 24px; flex-shrink: 0; padding-top: 1px; }
+/* hide time col on mobile - show via label */
+.tl-body { flex: 1; min-width: 0; }
+.tl-time-tag {
+  font-size: 10px; font-weight: 500;
+  color: var(--accent); letter-spacing: 0.05em;
+  margin-bottom: 3px; text-transform: uppercase;
+}
+.tl-label { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 3px; }
+.tl-note { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+.tip-box {
+  margin-top: 20px;
+  padding: 14px;
+  background: var(--blue-dim);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(142,180,212,0.15);
+}
+.tip-title { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+.tip-text { font-size: 12px; color: rgba(200,220,235,0.85); line-height: 1.65; }
+
+/* ══════════════════════════════════════
+   CHECKLIST VIEW
+══════════════════════════════════════ */
+#view-checklist {
+  padding-bottom: calc(var(--safe-bottom) + 80px);
+}
+.checklist-topbar {
+  padding: calc(var(--safe-top) + 14px) 20px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.checklist-title {
+  font-family: var(--font-display);
+  font-size: 26px; font-weight: 400; color: var(--text);
+}
+.checklist-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+.checklist-group { padding: 16px 20px 0; }
+.group-title {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.check-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px; cursor: pointer;
+  transition: background 0.15s;
+}
+.check-item:active { background: var(--surface2); }
+.check-item.done { opacity: 0.45; }
+.check-box {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 1.5px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+  transition: all 0.15s; background: transparent;
+}
+.check-item.done .check-box {
+  background: var(--green); border-color: var(--green);
+}
+.check-tick { display: none; font-size: 11px; color: #fff; }
+.check-item.done .check-tick { display: block; }
+.check-body { flex: 1; min-width: 0; }
+.check-label { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.check-meta { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.urgency {
+  font-size: 10px; font-weight: 500;
+  padding: 2px 7px; border-radius: 20px;
+  flex-shrink: 0; margin-top: 2px;
+}
+.urgency-now { background: var(--red-dim); color: var(--red); }
+.urgency-soon { background: var(--orange-dim); color: var(--orange); }
+.urgency-later { background: var(--green-dim); color: var(--green); }
+
+/* ══════════════════════════════════════
+   BOTTOM NAV
+══════════════════════════════════════ */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,15,20,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  padding-bottom: var(--safe-bottom);
+}
+.nav-tab {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px; padding: 10px 0;
+  cursor: pointer; color: var(--muted);
+  transition: color 0.15s;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.nav-tab.active { color: var(--accent); }
+.nav-icon { font-size: 20px; line-height: 1; }
+
+
+</style>
+</head>
+<body>
+
+<!-- ══ BOTTOM NAV ══ -->
+<nav class="bottom-nav">
+  <div class="nav-tab active" id="tab-home" onclick="showView('home')">
+    <span class="nav-icon">🗺️</span>
+    <span>Viaggio</span>
+  </div>
+  <div class="nav-tab" id="tab-city" onclick="showView('city')" style="display:none">
+    <span class="nav-icon">📍</span>
+    <span>Tappa</span>
+  </div>
+  <div class="nav-tab" id="tab-checklist" onclick="showView('checklist')">
+    <span class="nav-icon">✅</span>
+    <span>Da fare</span>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HOME VIEW
+══════════════════════════════════════ -->
+<div id="view-home" class="view active">
+  <div class="home-hero">
+    <div class="hero-eyebrow">Piano di Viaggio · Famiglia Mazzucchi</div>
+    <h1 class="hero-title">Cina <em>2026</em></h1>
+    <p class="hero-sub">22 luglio – 9 agosto · 4 persone · 6 città</p>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-val">18</div><div class="stat-lbl">Giorni</div></div>
+      <div class="stat-card"><div class="stat-val">6</div><div class="stat-lbl">Città</div></div>
+      <div class="stat-card"><div class="stat-val">4</div><div class="stat-lbl">Persone</div></div>
+    </div>
+  </div>
+
+  <div class="route-strip">
+    <span class="route-city">MXP</span><span class="route-arrow">✈</span>
+    <span class="route-city">Pechino</span><span class="route-arrow">🚄</span>
+    <span class="route-city">Xi'an</span><span class="route-arrow">🚄</span>
+    <span class="route-city">Chengdu</span><span class="route-arrow">✈</span>
+    <span class="route-city">Zhangjiajie</span><span class="route-arrow">✈</span>
+    <span class="route-city">Hangzhou</span><span class="route-arrow">🚄</span>
+    <span class="route-city">Shanghai</span><span class="route-arrow">✈</span>
+    <span class="route-city">MXP</span>
+  </div>
+
+  <div class="section-label">Seleziona una tappa</div>
+  <div class="city-cards">
+
+    <div class="city-card" onclick="openCity('beijing')">
+      <div class="city-card-icon" style="background:rgba(201,169,110,0.1)">🏯</div>
+      <div class="city-card-body">
+        <div class="city-card-name">Pechino</div>
+        <div class="city-card-meta">23 – 26 luglio · Muraglia, Città Proibita, treno notturno</div>
+      </div>
+      <div class="city-card-nights">4 notti</div>
+      <div class="city-card-arrow">›</div>
+    </div>
+
+    <div class="city-card" onclick="openCity('xian')">
+      <div class="city-card-icon" style="background:rgba(232,146,74,0.1)">⚔️</div>
+      <div class="city-card-body">
+        <div class="city-card-name">Xi'an</div>
+        <div class="city-card-meta">27 – 30 luglio · Terracotta, Mura, Muslim Quarter</div>
+      </div>
+      <div class="city-card-nights">3 notti</div>
+      <div class="city-card-arrow">›</div>
+    </div>
+
+    <div class="city-card" onclick="openCity('chengdu')">
+      <div class="city-card-icon" style="background:rgba(109,184,136,0.1)">🐼</div>
+      <div class="city-card-body">
+        <div class="city-card-name">Chengdu</div>
+        <div class="city-card-meta">30 luglio – 2 agosto · Panda, Leshan, Opera</div>
+      </div>
+      <div class="city-card-nights">3 notti</div>
+      <div class="city-card-arrow">›</div>
+    </div>
+
+    <div class="city-card" onclick="openCity('zhangjiajie')">
+      <div class="city-card-icon" style="background:rgba(142,180,212,0.1)">🏔️</div>
+      <div class="city-card-body">
+        <div class="city-card-name">Zhangjiajie</div>
+        <div class="city-card-meta">2 – 6 agosto · Avatar Mountains, Tianmen, Fox Fairy</div>
+      </div>
+      <div class="city-card-nights">4 notti</div>
+      <div class="city-card-arrow">›</div>
+    </div>
+
+    <div class="city-card" onclick="openCity('hangzhou')">
+      <div class="city-card-icon" style="background:rgba(155,135,196,0.1)">🍵</div>
+      <div class="city-card-body">
+        <div class="city-card-name">Hangzhou</div>
+        <div class="city-card-meta">6 – 8 agosto · Lago Ovest, Lingyin, Tè Longjing</div>
+      </div>
+      <div class="city-card-nights">2 notti</div>
+      <div class="city-card-arrow">›</div>
+    </div>
+
+    <div class="city-card" onclick="openCity('shanghai')">
+      <div class="city-card-icon" style="background:rgba(212,118,106,0.1)">✈️</div>
+      <div class="city-card-body">
+        <div class="city-card-name">Shanghai</div>
+        <div class="city-card-meta">8 agosto · Bund, cena, volo notturno per MXP</div>
+      </div>
+      <div class="city-card-nights">Transito</div>
+      <div class="city-card-arrow">›</div>
+    </div>
+
+  </div>
+
+  <div class="note-card">
+    <div class="note-label">Trasferimenti</div>
+    <div class="note-text">🌙 Pechino→Xi'an: <b>PRENOTATO ✓</b> (26/7 ore 20:42)<br>
+    🚄 Xi'an→Chengdu: apre il <b>15 luglio</b><br>
+    🚄 Hangzhou→Shanghai: apre il <b>24 luglio</b></div>
+  </div>
+
+  <div style="height: 80px"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CITY VIEW
+══════════════════════════════════════ -->
+<div id="view-city" class="view">
+  <div class="city-topbar">
+    <div class="back-btn" onclick="goHome()">‹</div>
+    <div class="topbar-info">
+      <div class="topbar-city" id="topbar-city-name">Pechino</div>
+      <div class="topbar-dates" id="topbar-city-dates">23 – 26 luglio · 3 notti + treno notturno</div>
+    </div>
+  </div>
+  <div class="day-nav-wrap" id="day-nav"></div>
+  <div id="day-contents"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CHECKLIST VIEW
+══════════════════════════════════════ -->
+<div id="view-checklist" class="view">
+  <div class="checklist-topbar">
+    <div class="status-bar"></div>
+    <div class="checklist-title">Da prenotare</div>
+    <div class="checklist-sub">Tocca per spuntare le prenotazioni fatte</div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="group-title">🔴 Da fare subito</div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Volo interno CTU → DYG (Chengdu→Zhangjiajie)</div>
+        <div class="check-meta">Prenotare subito — agosto esaurisce rapidamente</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Volo interno DYG → HGH (Zhangjiajie→Hangzhou)</div>
+        <div class="check-meta">Prenotare subito — agosto esaurisce rapidamente</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Città Proibita — biglietto ingresso</div>
+        <div class="check-meta">dpm.org.cn · Limite 30.000/giorno · 2-3 mesi prima</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Glass Bridge Zhangjiajie</div>
+        <div class="check-meta">Accesso numerico giornaliero · 4-6 settimane prima</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Panda Giganti Chengdu</div>
+        <div class="check-meta">panda.org.cn · Accesso contingentato · 3-4 settimane prima</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="group-title">🟡 Treni AV — finestra di 15 giorni</div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Treno notturno Pechino → Xi'an: PRENOTATO ✓</div>
+        <div class="check-meta">Prenotaz. n. 1381036024436534 · 26/7 ore 20:42 Beijingxi → 27/7 ore 08:35 Xi'anbei · 286,28 € · 4 passeggeri</div>
+      </div>
+      <span class="urgency urgency-soon">12 lug</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Treno AV Xi'an → Chengdu</div>
+        <div class="check-meta">30 luglio · Vendita apre 15 luglio alle 08:00</div>
+      </div>
+      <span class="urgency urgency-soon">15 lug</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Treno AV Hangzhou → Shanghai</div>
+        <div class="check-meta">8 agosto · Vendita apre 24 luglio · Frequentissimi, meno urgente</div>
+      </div>
+      <span class="urgency urgency-soon">24 lug</span>
+    </div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="group-title">🟢 Prossime settimane</div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Muraglia Mutianyu — funivia + ingresso</div>
+        <div class="check-meta">3-4 settimane prima · Partenza 25 luglio</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Tour Tiananmen + Città Proibita + Museo Tesoro: PRENOTATO ✓</div>
+        <div class="check-meta">Prenotaz. n. 1381036021632892 · 24 luglio · 110,81 € · gruppo ristretto in inglese/spagnolo</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Esercito di Terracotta — biglietto ingresso</div>
+        <div class="check-meta">xjbwg.com · 3-4 settimane prima · Mattina 28 luglio</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Opera del Sichuan / Bian Lian — posti preferenziali</div>
+        <div class="check-meta">2-3 settimane prima · Sera 31 luglio</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Buddha di Leshan — biglietto ingresso</div>
+        <div class="check-meta">1-2 settimane prima · 1 agosto</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Tianmen Fox Fairy Show — posti VIP</div>
+        <div class="check-meta">3-4 settimane prima · Sera 4 agosto</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Tianmen Mountain — biglietto funivia</div>
+        <div class="check-meta">1-2 settimane prima · Mattina 4 agosto</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Sunset Cruise Lago Ovest Hangzhou</div>
+        <div class="check-meta">1 settimana prima · Sera 7 agosto</div>
+      </div>
+      <span class="urgency urgency-later">Presto</span>
+    </div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="group-title">📱 Prima di partire</div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">VPN installata (ExpressVPN o NordVPN)</div>
+        <div class="check-meta">Da installare in Italia — in Cina non scaricabile</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">WeChat, Didi, Alipay installati</div>
+        <div class="check-meta">App essenziali per comunicare, taxi e pagamenti in Cina</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div class="check-body">
+        <div class="check-label">Verifica esenzione visto per italiani</div>
+        <div class="check-meta">Controllare stato aggiornato prima della partenza</div>
+      </div>
+      <span class="urgency urgency-now">Ora</span>
+    </div>
+
+  </div>
+
+  <div style="height: 80px"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     DATA
+══════════════════════════════════════ -->
+<script>
+const CITIES = {
+  beijing: {
+    name: 'Pechino', dates: '23 – 26 luglio · 3 notti + treno notturno',
+    days: [
+      {
+        label: '23 lug', badge: 'Arrivo', badgeKind: 'arrival',
+        title: 'Arrivo a Pechino',
+        date: 'Mercoledì 23 luglio',
+        intro: 'Dopo quasi 10 ore di volo notturno da Milano, atterrate all\'alba. Prima regola anti jet-lag: non dormite appena arrivati. Adattatevi subito all\'orario locale (+6h rispetto all\'Italia).',
+        slots: [
+          { time: '05:40', label: 'Arrivo PEK — controlli e transfer hotel', note: 'Taxi ufficiale o Didi verso il centro. Evitate i tassisti abusivi. Tragitto: ~40-50 min.' },
+          { time: 'Mattina', label: 'Check-in, doccia e riposo breve', note: 'Un\'ora è sufficiente — non dormite di più o non riuscirete ad addormentarvi la sera.' },
+          { time: 'Pomeriggio', label: 'Prima passeggiata: Piazza Tiananmen', note: 'La piazza più grande del mondo (440.000 m²). La Città Proibita la visitiamo domani, freschi.' },
+          { time: 'Sera', label: 'Cena a Wangfujing Snack Street', note: 'Street food pechinese: baozi, jianbing, zhajiangmian. I ragazzi possono osare con gli scorpioni fritti!' },
+        ],
+        tip: { title: 'Connettività', text: 'Acquistate una SIM locale all\'aeroporto (China Mobile). Attivate subito la VPN prima di uscire dall\'area arrivi: è l\'unico momento in cui potete scaricarla senza problemi.' }
+      },
+      {
+        label: '24 lug', badge: 'Tour guidato', badgeKind: 'show',
+        title: 'Tour guidato — Tiananmen, Città Proibita e Museo del Tesoro',
+        date: 'Giovedì 24 luglio',
+        intro: 'Tour di gruppo ristretto prenotato (n. 1381036021632892) con guida in inglese o spagnolo. Piazza Tiananmen, Città Proibita e Museo del Tesoro Imperiale — il cuore storico di Pechino in una giornata.',
+        slots: [
+          { time: 'Mattina', label: 'Tour guidato — Piazza Tiananmen e Città Proibita', note: 'Ingresso dalla Porta Meridionale sotto il ritratto di Mao. La guida darà contesto a tutto — la Città Proibita senza spiegazioni è solo un insieme di cortili. Calcolate 3 ore minimo.' },
+          { time: 'Metà matt.', label: 'Museo del Tesoro Imperiale (incluso nel tour)', note: 'Gioielli, abiti cerimoniali e oggetti imperiali. Spesso trascurato dai visitatori autonomi — con la guida è uno dei momenti più ricchi della giornata.' },
+          { time: 'Pranzo', label: 'Fine tour — pranzo autonomo in zona', note: 'Jingshan Park è a due passi: salite sulla collina per la vista aerea sulla Città Proibita appena visitata. La foto più bella di Pechino.' },
+          { time: 'Pomeriggio', label: 'Hutong di Nanluoguxiang — giro in risciò', note: 'I vicoli storici della dinastia Yuan (1200 d.C.). Il risciò è il modo migliore con il caldo — circa 30 yuan/persona.' },
+          { time: 'Sera', label: 'Cena con anatra alla pechinese', note: 'Quanjude (fondato 1864) o Dadong. Prenotate il tavolo! Pelle croccante con crepes, salsa hoisin e cipollotto.' },
+        ],
+        tip: { title: 'Prenotazione confermata', text: 'Tour di gruppo ristretto · n. 1381036021632892 · 110,81 € · 4 persone · 24 luglio. Guida in inglese o spagnolo inclusa. Portate acqua e scarpe comode.' }
+      },
+      {
+        label: '25 lug', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Muraglia Cinese a Mutianyu',
+        date: 'Venerdì 25 luglio',
+        intro: '21.196 km totali, costruita in 2.000 anni. Mutianyu (70 km da Pechino) è la sezione più scenografica e meno affollata — torri di avvistamento che si arrampicano su creste boscose.',
+        slots: [
+          { time: '07:30', label: 'Partenza per Mutianyu (1h30 di auto)', note: 'Partite presto: il caldo al mattino è sopportabile, alle 11 diventa intenso. Portate acqua abbondante.' },
+          { time: '09:30', label: 'Funivia verso la Muraglia', note: 'La funivia porta in cima in pochi minuti. In alternativa 1.080 scalini — sconsigliato con il caldo.' },
+          { time: '10:00', label: 'Trekking sulla Muraglia — sezione est', note: 'Camminate verso le torri più isolate e panoramiche. Calcolate 2-3 ore per esplorare comodamente.' },
+          { time: 'Metà matt.', label: 'Discesa con il TOBOGA! 🛝', note: 'La pista di metallo nella foresta è imperdibile — i ragazzi ne chiederanno una seconda corsa. Durata ~5 min.' },
+          { time: 'Pranzo', label: 'Pranzo alla base della Muraglia', note: 'Noodles di mais locali — genuini e gustosi.' },
+          { time: 'Pomeriggio', label: 'Rientro + Tempio del Cielo (Tiantan)', note: 'UNESCO. La Sala della Preghiera — cilindrica su tre terrazze di marmo bianco — è tra le architetture più perfette al mondo.' },
+          { time: 'Sera', label: 'Cena in zona Sanlitun', note: 'Quartiere cosmopolita con ristoranti internazionali — pausa dalla cucina cinese se serve.' },
+        ],
+        tip: { title: 'Curiosità', text: 'La Muraglia NON si vede dallo spazio ad occhio nudo — troppo sottile. Lo confermò l\'astronauta cinese Yang Liwei nel 2003. Nelle fondamenta sono sepolti i resti di migliaia di operai morti durante la costruzione.' }
+      },
+      {
+        label: '26 lug', badge: 'Treno notturno', badgeKind: 'travel',
+        title: 'Summer Palace — poi cena e treno notturno per Xi\'an',
+        date: 'Sabato 26 luglio',
+        intro: 'Ultima giornata a Pechino. Mattina al palazzo estivo imperiale, poi rientro con calma, cena anticipata e partenza con il treno notturno per Xi\'an.',
+        slots: [
+          { time: '08:30', label: 'Summer Palace (Yiheyuan)', note: '3 km² di giardini e il Lago Kunming. Il Corridoio Lungo (728 m) è decorato con 14.000 dipinti. Giro in barca consigliato.' },
+          { time: '11:00', label: 'Barca sul Lago Kunming', note: 'Vista sul Ponte dei Diciassette Archi — uno dei capolavori architettonici del palazzo.' },
+          { time: 'Pranzo', label: 'Pranzo e rientro in hotel', note: 'Rientrate nel primo pomeriggio per avere tempo per i bagagli senza fretta.' },
+          { time: 'Pomeriggio', label: 'Preparazione bagagli', note: 'Preparate le valigie con calma. Tenete separato uno zaino per la notte in treno: documenti, spazzolino, cambio, snack, cuffie, felpa (i treni cinesi sono freddi di notte).' },
+          { time: '18:00', label: 'Cena anticipata vicino all\'hotel', note: 'Cenatela con calma entro le 19:00. Evitate ristoranti lontani dalla metro che porta a Beijingxi.' },
+          { time: '19:30', label: 'Partenza per Beijing West Station (Beijingxi)', note: 'Metro Linea 9 diretta — circa 30-40 min dal centro. Arrivate in stazione almeno 45 min prima: i controlli bagagli e sicurezza sono obbligatori in tutte le stazioni cinesi.' },
+          { time: '20:42', label: 'Partenza treno notturno Beijingxi → Xi\'an 🌙', note: 'Prenotaz. n. 1381036024436534 · 4 passeggeri · arrivo 27/7 ore 08:35 a Xi\'anbei. Durata ~12 ore. Cuccette comode — portate tappi per le orecchie.' },
+        ],
+        tip: { title: 'Prenotazione confermata', text: 'Treno notturno Beijingxi → Xi\'anbei · n. 1381036024436534 · 286,28 € · Mazzucchelli Michela + 3 · Partenza 26/7 ore 20:42 · Arrivo 27/7 ore 08:35.' }
+      },
+    ]
+  },
+
+  xian: {
+    name: "Xi'an", dates: '27 – 30 luglio · 3 notti',
+    days: [
+      {
+        label: '27 lug', badge: 'Arrivo', badgeKind: 'arrival',
+        title: "Arrivo a Xi'an — mattina tranquilla",
+        date: 'Domenica 27 luglio',
+        intro: "Arrivate a Xi'an dopo una notte in treno. Nessuna fretta — avete tutta la giornata. Mattina tranquilla per recuperare, poi nel pomeriggio le Mura Antiche e la sera il Muslim Quarter.",
+        slots: [
+          { time: '08:35', label: "Arrivo a Xi'anbei dal treno notturno", note: 'Metro Linea 4 da Xi\'anbei verso il centro — circa 30-40 minuti. Comoda e diretta.' },
+          { time: '09:30', label: 'Check-in hotel — deposito bagagli', note: 'La camera probabilmente non è ancora pronta. Lasciate i bagagli in custodia. Prendetevi il tempo che serve.' },
+          { time: 'Mattina', label: 'Colazione con calma e passeggiata leggera', note: 'Trovate un caffè vicino all\'hotel. Esplorate i dintorni a piedi senza meta precisa — avete dormito su un treno.' },
+          { time: 'Pranzo', label: "Primo pranzo a Xi'an — cucina locale", note: 'Roujiamo (il "hamburger cinese" con manzo brasato) e biangbiang noodles — gli spaghetti con il carattere più complesso della lingua cinese (58 tratti!).' },
+          { time: 'Pomeriggio', label: 'Mura Antiche di Xi\'an in bicicletta', note: 'Le mura medievali più intatte della Cina: 14 km di perimetro, 12 m di altezza. Bici a noleggio (~45 yuan/2h). Rilassante e scenografico.' },
+          { time: 'Sera', label: 'Muslim Quarter (Huimin Jie) — cena', note: '70.000 musulmani Hui vivono qui da 1.000 anni. Roujiamo, yangrou paomo, biangbiang noodles. Il battesimo gastronomico di Xi\'an.' },
+        ],
+        tip: { title: 'Notte in treno', text: "Arriverete con sonno arretrato — non esagerate il primo giorno. Le Mura in bici sono perfette: rilassanti, all'aria aperta, nessuna fila. Il Muslim Quarter di sera è vivace ma non stancante." }
+      },
+      {
+        label: '28 lug', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Esercito di Terracotta',
+        date: 'Lunedì 28 luglio',
+        intro: 'Scoperto nel 1974 da contadini che scavano un pozzo. 8.000 soldati in terracotta, tutti con volti diversi, sepolti per 2.200 anni a guardia del primo imperatore della Cina.',
+        slots: [
+          { time: '07:45', label: 'Partenza per il sito (30-40 min)', note: 'Con prenotazione online si entra subito. Senza: code fino a 2 ore in agosto.' },
+          { time: '08:30', label: 'Fossa 1 — la più grande e spettacolare', note: '6.000 guerrieri in formazione su 230 metri. L\'impatto visivo è schiacciante. Erano tutti colorati — il contatto con l\'aria li ha ossidati in pochi minuti.' },
+          { time: '10:00', label: 'Fossa 2 e Fossa 3', note: 'Fossa 2: cavalleria e arcieri. Fossa 3: il quartier generale con i generali. Nel museo: due carri in bronzo a grandezza reale.' },
+          { time: 'Pranzo', label: 'Pranzo in zona', note: 'Liangpi — noodles freddi di grano con salsa di sesamo, tipici della cucina Shaanxi.' },
+          { time: 'Pomeriggio', label: 'Grande Moschea + Pagoda Grande Oca Selvatica', note: 'La moschea (742 d.C.): architettura cinese ma è una moschea — i minareti sembrano pagode. Capolavoro di sintesi culturale.' },
+          { time: 'Sera', label: 'Spettacolo Danza Tang (facoltativo)', note: 'Danze imperiali della dinastia Tang con costumi sontuosi. Tang Dynasty Theatre o Shaanxi Grand Opera.' },
+        ],
+        tip: { title: 'La vera tomba è ancora chiusa', text: "Qin Shi Huang (221 a.C.) unificò la Cina standardizzando pesi, misure e scrittura. La sua tomba è a 1,5 km dai guerrieri: le misurazioni rilevano livelli di mercurio 100 volte superiori alla norma, confermando i testi storici." }
+      },
+      {
+        label: '29 lug', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Mausoleo Qin e Terme di Huaqing',
+        date: 'Martedì 29 luglio',
+        intro: "L'ultima giornata a Xi'an esplora il tumulo funerario dell'imperatore e le terme imperiali dove nacque una delle storie d'amore più celebri della storia cinese.",
+        slots: [
+          { time: 'Mattina', label: 'Mausoleo di Qin Shi Huang', note: '51 metri di altezza, 355 m di lato. La tomba è ancora sigillata — dentro, strutture enormi e livelli di mercurio anomali confermano le descrizioni storiche.' },
+          { time: 'Pranzo', label: 'Pranzo locale in zona', note: 'Rou jia mo autentico — molto migliore della versione turistizzata del Muslim Quarter.' },
+          { time: 'Pomeriggio', label: 'Terme di Huaqing (Huaqing Chi)', note: "Le terme dell'imperatore Tang Xuanzong e della concubina Yang Guifei — la storia d'amore imperiale per eccellenza. Le vasche in marmo bianco sono ancora visibili." },
+          { time: 'Sera', label: 'Ultima cena nel Muslim Quarter + bagagli', note: 'Ultima occasione per i biangbiang noodles. Comprate le repliche in miniatura dei guerrieri dai produttori locali.' },
+        ],
+        tip: { title: 'Yang Guifei', text: "Considerata una delle 'Quattro Bellezze' della storia cinese. Le terme di Huaqing furono costruite dall'imperatore in suo onore, con vasche private profumate. La loro storia tragica è immortalata nel poema 'Canzone del Dolore Eterno' di Bai Juyi." }
+      },
+    ]
+  },
+
+  chengdu: {
+    name: 'Chengdu', dates: '30 luglio – 2 agosto · 3 notti',
+    days: [
+      {
+        label: '30 lug', badge: 'Trasferimento', badgeKind: 'travel',
+        title: 'Treno per Chengdu',
+        date: 'Mercoledì 30 luglio',
+        intro: 'Chengdu è la capitale del Sichuan — la regione più vitale della Cina. I Chengdunesi sono famosi per il buon cibo, il mahjong nelle tea house e un ritmo di vita quasi mediterraneo.',
+        slots: [
+          { time: 'Mattina', label: "Treno AV Xi'an → Chengdu (3h30)", note: 'Il treno attraversa le montagne del Qinling — paesaggi spettacolari di valli e foreste.' },
+          { time: 'Pomeriggio', label: 'Check-in + Kuanzhai Alley (Vicoli Larghi e Stretti)', note: 'Tre vicoli storici della dinastia Qing (XVIII sec.) perfettamente restaurati. Tea house, ristoranti, opera del Sichuan all\'aperto.' },
+          { time: 'Sera', label: 'Hot pot Sichuan — prima esperienza! 🌶️', note: 'Chiedete la versione "yuan yang" (metà piccante, metà normale). Il pepe di Sichuan crea un intorpidimento unico — niente di simile esiste in Italia.' },
+        ],
+        tip: { title: 'Il pepe di Sichuan', text: 'Non è un vero pepe. Attiva i recettori del tatto prima di quelli del dolore, creando formicolio e intorpidimento. Fu vietato negli USA dal 1968 al 2005 per ragioni fitosanitarie. Oggi è il condimento cinese più esportato al mondo.' }
+      },
+      {
+        label: '31 lug', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Panda e Opera del Sichuan',
+        date: 'Giovedì 31 luglio',
+        intro: 'Il giorno del panda. Ma c\'è un segreto: i panda sono attivi SOLO nelle prime ore del mattino. Arrivate all\'apertura o li trovate addormentati.',
+        slots: [
+          { time: '07:45', label: 'Taxi verso la Base di Ricerca dei Panda (30 min)', note: 'Prenotate il taxi la sera prima. Arrivare tra i primi 500 visitatori fa una differenza enorme.' },
+          { time: '08:00', label: 'Base di Ricerca Panda Giganti 🐼', note: 'I panda mangiano bambù solo 08:00-10:00. Dopo si addormentano. Inclusi anche i panda rossi (Ailurus fulgens) — altrettanto adorabili.' },
+          { time: 'Pranzo', label: 'Rientro in centro — pranzo', note: 'Mapo tofu: il piatto più famoso del Sichuan. Inventato nel XIX sec. da una donna anziana con il viso butterato ("mapo" = vecchia butterata).' },
+          { time: 'Pomeriggio', label: 'Tempio di Wenshu + Taikoo Li', note: 'Tempio buddhista (702 d.C.) con tea house nel cortile. Taikoo Li: il quartiere shopping più trendy di Chengdu integrato nell\'architettura storica.' },
+          { time: 'Sera', label: 'Opera del Sichuan — Bian Lian (cambio maschera) 🎭', note: 'Il performer cambia maschera in meno di un secondo. Tecnica segreta tramandata solo di padre in figlio maschio — nessuno sa ancora come funziona davvero.' },
+        ],
+        tip: { title: 'Il Bian Lian', text: 'Tutelato dallo stato cinese come patrimonio immateriale. Nel 1987 vietato ufficialmente a stranieri e donne. Nel 2005 la prima donna praticante ottenne il diritto dopo una battaglia legale. Il segreto è ancora custodito.' }
+      },
+      {
+        label: '1 ago', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Buddha Gigante di Leshan',
+        date: 'Sabato 1 agosto',
+        intro: 'Il buddha di pietra più grande del mondo: 71 metri dalla testa ai piedi. Costruito tra il 713 e l\'803 d.C. — 90 anni di lavoro da generazioni di operai.',
+        slots: [
+          { time: '07:30', label: 'Partenza per Leshan (1h30)', note: 'Autobus da Chengdu Xinnanmen (~2h, economico) o tour privato. Arrivate entro le 9:30 per evitare le code.' },
+          { time: '09:30', label: 'Buddha Gigante — scalinata panoramica', note: 'Scendete lungo la Lingyun Mountain: ogni alluce è grande quanto un essere umano adulto. La coda può essere lunga — armate di pazienza.' },
+          { time: '11:00', label: 'Giro in barca sul fiume Minjiang (consigliato!)', note: 'L\'unico modo per vedere il Buddha nella sua interezza da una prospettiva frontale. Tour ogni 30 min dall\'imbarcadero. ~30 minuti.' },
+          { time: 'Pranzo', label: 'Pranzo a Leshan — pesce di fiume', note: 'Specialità locale del Minjiang. Tofu fritto con salsa piccante in abbinamento.' },
+          { time: 'Pomeriggio', label: 'Rientro a Chengdu — serata tranquilla', note: 'Cena leggera e bagagli. Domani mattina presto volo per Zhangjiajie.' },
+        ],
+        tip: { title: 'Un\'ingegneria millenniale', text: 'All\'interno della statua esiste un sistema di drenaggio progettato 1.200 anni fa che ancora oggi funziona perfettamente, proteggendo la pietra dall\'erosione. La leggenda narra che il monaco costruttore Haitong si cavò gli occhi per scoraggiare un funzionario corrotto.' }
+      },
+    ]
+  },
+
+  zhangjiajie: {
+    name: 'Zhangjiajie', dates: '2 – 6 agosto · 4 notti',
+    days: [
+      {
+        label: '2 ago', badge: 'Trasferimento', badgeKind: 'travel',
+        title: 'Volo per Zhangjiajie',
+        date: 'Domenica 2 agosto',
+        intro: 'Migliaia di colonne di quarzo-arenaria alte fino a 300 metri che emergono dalla foresta. James Cameron le visitò prima di Avatar — le "Montagne Fluttuanti" sono modellate su queste colonne.',
+        slots: [
+          { time: 'Mattina', label: 'Volo Chengdu CTU → Zhangjiajie DYG (1h30)', note: 'L\'atterraggio tra le montagne è già spettacolare di per sé — specialmente con nuvole basse.' },
+          { time: 'Arrivo', label: 'Transfer verso Wulingyuan (40 min)', note: 'Base per il National Forest Park. Hotel vicino all\'ingresso del parco per minimizzare i trasferimenti mattutini.' },
+          { time: 'Pomeriggio', label: 'Check-in e Xibu Street', note: 'Comprate snack, acqua e barrette energetiche per i giorni nel parco. Prenotate il Fox Fairy Show per il 4 agosto.' },
+          { time: 'Sera', label: 'Cena con cucina Hunan', note: 'Più acida e affumicata rispetto al Sichuan. Carne di maiale affumicata (腊肉), tofu puzzolente fritto (臭豆腐). Riposate — domani è intenso.' },
+        ],
+        tip: { title: 'Cosa aspettarsi', text: 'Luglio-agosto: caldo umido (30-35°C), possibili temporali pomeridiani brevi, nebbia mattutina sulle colonne (che le rende ancora più misteriose). Portate scarpe con suola antisdrucciolo — i sentieri sono scivolosi.' }
+      },
+      {
+        label: '3 ago', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Avatar Mountains — National Forest Park',
+        date: 'Lunedì 3 agosto',
+        intro: 'Oltre 3.000 colonne di quarzite formatesi 380 milioni di anni fa dall\'erosione di un antico altopiano marino. Alcune si elevano per oltre 400 metri.',
+        slots: [
+          { time: '07:00', label: 'Ingresso al parco — Wulingyuan Gate', note: 'Arrivare all\'apertura è fondamentale: le navette si intasano rapidamente. Il biglietto copre 3 giorni.' },
+          { time: '08:00', label: 'Yuanjiajie — Avatar Hallelujah Mountain 🎬', note: 'Il belvedere a 1.048 m: la colonna scelta da Cameron per Avatar. Con la nebbia mattutina sembra davvero fluttuare. Effetto ipnotico.' },
+          { time: '09:30', label: 'Ponte nel Cielo (Tianxia No.1 Bridge)', note: 'Ponte naturale sospeso tra due colonne a 357 m di altezza — il più alto ponte naturale del mondo.' },
+          { time: 'Pranzo', label: 'Ristorante interno al parco', note: 'Riso con verdure saltate e carne. Portate anche qualche snack.' },
+          { time: 'Pomeriggio', label: 'Tianzi Mountain — panorami senza fine', note: 'Vetta a 1.262 m raggiungibile con funivia. In estate le nuvole basse creano il "mare di nuvole" — surreale e fotograficamente straordinario.' },
+          { time: 'Tardo pom.', label: 'Golden Whip Stream (Jinbian Xi) 🐒', note: 'Sentiero di 7,5 km lungo un torrente cristallino. Temperatura fresca. Macachi selvatici spesso scendono a riva — non dategli cibo.' },
+        ],
+        tip: { title: 'Cameron a Zhangjiajie', text: 'Nel 2008 Cameron visitò il parco con un piccolo team. Rimase così colpito che Pandora prese vita da queste colonne. Curiosità: il direttore del parco andò al cinema a vedere Avatar e non riconobbe subito le proprie montagne — erano troppo surreali anche per lui.' }
+      },
+      {
+        label: '4 ago', badge: 'Serata spettacolo', badgeKind: 'show',
+        title: 'Tianmen Mountain + Fox Fairy Show',
+        date: 'Martedì 4 agosto',
+        intro: 'La giornata più intensa: Tianmen Mountain di giorno con la Porta del Paradiso, il Glass Bridge nel canyon, e la sera il Fox Fairy Show con Tianmen come sfondo reale.',
+        slots: [
+          { time: '07:30', label: 'Stazione funivia Tianmen — dal centro città', note: 'Diversa dal parco: parte dal centro di Zhangjiajie. Acquistate il biglietto completo: funivia + bus + ingresso.' },
+          { time: '08:00', label: 'Funivia Tianmen — 7,4 km, la più lunga del mondo', note: '28 minuti di ascesa su vallate vertiginose. Altitudine massima: 1.518 metri.' },
+          { time: '09:00', label: 'Tianmen Cave — la Porta del Paradiso 🌤️', note: 'Arco naturale di 131,5 m di altezza. Visibile dalla città in basso. 999 scalini per raggiungerla — ripidi ma ogni gradino vale.' },
+          { time: '10:30', label: 'Glass Plank Road — sentiero di cristallo', note: 'Pannelli trasparenti nella parete verticale a 1.400 m. Guardate giù: solo aria per centinaia di metri. Il momento più adrenalinico per i ragazzi.' },
+          { time: 'Pranzo', label: 'Pranzo panoramico in vetta', note: 'Ristorante con vista. Dopo giorni intensi, concedetevi una pausa lunga.' },
+          { time: 'Pomeriggio', label: 'Grand Canyon + Glass Bridge 🌉', note: 'Ponte di vetro più lungo del mondo: 430 m, 300 m di altezza. Costruito nel 2016 da Haim Dotan. Regge 800 persone — ma camminandoci sembra impossibile.' },
+          { time: '19:45', label: 'Arrivo al Tianmen Fox Fairy Theatre', note: 'Ai piedi della montagna, in città. Arrivate in anticipo per i posti migliori.' },
+          { time: '20:20', label: 'Tianmen Fox Fairy Show — 90 minuti 🦊', note: '500 attori, Tianmen come sfondo reale, colonna sonora di Tan Dun (Oscar per Tigre e Dragone), neve artificiale, ponti aerei illuminati.' },
+        ],
+        tip: { title: 'Il Glass Bridge', text: 'Aprì nel 2016 con 80.000 visitatori il primo giorno — dovette chiudere dopo 13 giorni per soprannumero. I pannelli di vetro sono spessi 4 cm (triplo strato). Se vedete qualcuno "spaccarli": è uno show organizzato. Il vetro regge.' }
+      },
+      {
+        label: '5 ago', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Grand Canyon e Baofeng Lake',
+        date: 'Mercoledì 5 agosto',
+        intro: 'Giornata più rilassata: se ieri avete già fatto il Glass Bridge usate la mattina per riposare. Il pomeriggio al Baofeng Lake è il momento più contemplativo del soggiorno.',
+        slots: [
+          { time: 'Mattina', label: 'Grand Canyon + Glass Bridge (se non fatto ieri)', note: 'Il canyon da solo vale la visita: sentieri nella foresta, cascate, pareti rocciose colorate. Durata ~3 ore.' },
+          { time: 'Mattina alt.', label: 'Alternativa: Tianzi Mountain nord', note: 'Sezione meno turistica, ugualmente panoramica. Raggiungibile in navetta.' },
+          { time: 'Pranzo', label: 'Pranzo in zona Baofeng Lake', note: 'Ristoranti locali più semplici e autentici rispetto all\'interno del parco principale.' },
+          { time: 'Pomeriggio', label: 'Baofeng Lake — giro in barca 🚣', note: 'Lago verde smeraldo circondato da colonne altissime. Barche a remi nel silenzio tra le pareti rocciose. Il momento più meditativo del viaggio. ~45 minuti.' },
+          { time: 'Sera', label: 'Ultima sera a Zhangjiajie — bagagli', note: 'Comprate tè selvatico locale e erbe medicinali — ottimi regali. Domani mattina volo per Hangzhou.' },
+        ],
+        tip: { title: 'Perché il lago è verde?', text: 'Il colore smeraldo è causato da alghe microscopiche e dalla riflessione della luce attraverso acqua pura di montagna ricca di minerali. L\'effetto è più intenso nelle giornate soleggiate di estate.' }
+      },
+    ]
+  },
+
+  hangzhou: {
+    name: 'Hangzhou', dates: '6 – 8 agosto · 2 notti',
+    days: [
+      {
+        label: '6 ago', badge: 'Trasferimento', badgeKind: 'travel',
+        title: 'Volo per Hangzhou — Lago Ovest',
+        date: 'Giovedì 6 agosto',
+        intro: 'Marco Polo la definì "la città più nobile e magnifica del mondo". Il Lago Ovest — UNESCO dal 2011 — mantiene intatta quella magia dopo 700 anni.',
+        slots: [
+          { time: 'Mattina', label: 'Volo Zhangjiajie DYG → Hangzhou HGH (2 ore)', note: 'Arrivate con 2 ore di anticipo — aeroporto piccolo ma con controlli approfonditi.' },
+          { time: 'Arrivo', label: 'Transfer e check-in vicino al Lago Ovest', note: 'Hotel entro 10 minuti a piedi dal lago. Zona Nanshan Road con vista.' },
+          { time: 'Pomeriggio', label: 'Prima passeggiata sul Lago Ovest (Xi Hu)', note: '6,5 km² circondati da colline, pagode, templi. Bai Causeway e Su Causeway le passeggiate storiche. Barca verso l\'Isola di Xiaoyingzhou consigliata.' },
+          { time: 'Sera', label: 'Tramonto sul lago e cena', note: 'Dongpo Rou: maiale brasato nel vino di riso per 4 ore — inventato dal poeta Su Dongpo nell\'XI secolo. Il piatto simbolo di Hangzhou.' },
+        ],
+        tip: { title: 'Il Lago Ovest nella cultura cinese', text: 'Soggetto di migliaia di poesie. Il poeta Su Dongpo scrisse: "Se paragono il Lago Ovest alla bella Xi Shi, sia la pioggia che il sole la adornano egualmente". La leggenda della Serpente Bianca — storia d\'amore tra uno studioso e uno spirito del lago — è ambientata proprio qui.' }
+      },
+      {
+        label: '7 ago', badge: 'Giornata piena', badgeKind: 'full',
+        title: 'Tempio Lingyin e Tè Longjing',
+        date: 'Venerdì 7 agosto',
+        intro: 'L\'ultima giornata turistica completa del viaggio: uno dei templi buddhisti più importanti della Cina e le piantagioni del tè più pregiato al mondo.',
+        slots: [
+          { time: 'Mattina', label: 'Tempio Buddhista di Lingyin (fondato 326 d.C.)', note: 'Le Grotte di Feilai Feng: 470 sculture rupestri dal X al XIV sec. La leggenda: la collina "volò dall\'India" portata dal monaco fondatore Huili.' },
+          { time: '10:30', label: 'Sala del Grande Buddha', note: 'Statua di 19,6 m scolpita nel 1956 nel legno di canfora. Atmosfera raccolta con incenso e monaci in preghiera. Rispettate il silenzio.' },
+          { time: 'Pranzo', label: 'Pranzo in zona Longjing', note: '"Longjing xiaren": gamberetti saltati con foglie di tè fresco — il piatto più rappresentativo della cucina di Hangzhou.' },
+          { time: 'Pomeriggio', label: 'Piantagioni di Tè Longjing 🍃', note: 'Il tè verde più pregiato al mondo. Visita con degustazione guidata. Comprate il tè direttamente dai produttori: costa 10 volte meno che in città, qualità superiore.' },
+          { time: '17:00', label: 'Sunset Cruise sul Lago Ovest 🌅', note: 'I loti in piena fioritura in agosto riflettono la luce arancione del sole. Su Causeway sullo sfondo. Uno dei momenti più sereni dell\'intero viaggio.' },
+          { time: 'Sera', label: 'Cena e ultima passeggiata sul lago', note: 'Zona Nanshan Road. Ultima notte a Hangzhou — domani trasferimento verso Shanghai.' },
+        ],
+        tip: { title: 'Il Tè Longjing', text: 'L\'imperatore Qianlong (XVIII sec.) designò 18 cespugli specifici come "cespugli imperiali". Oggi esistono ancora: nel 2023 la vendita dei primi 500 grammi di queste piante ha raggiunto 180.000 yuan (circa 23.000€).' }
+      },
+    ]
+  },
+
+  shanghai: {
+    name: 'Shanghai', dates: '8 agosto · transito finale',
+    days: [
+      {
+        label: '8 ago', badge: 'Rientro', badgeKind: 'return',
+        title: 'Shanghai e volo notturno per Milano',
+        date: 'Sabato 8 agosto',
+        intro: 'Non è una tappa turistica — è la porta d\'uscita. Ma il pomeriggio sul Bund chiude il viaggio con il paesaggio urbano più spettacolare della Cina.',
+        slots: [
+          { time: 'Mattina', label: 'Check-out a Hangzhou', note: 'Mattina bloccata per il trasferimento verso Shanghai.' },
+          { time: 'Mezzogiorno', label: 'Treno AV Hangzhou → Shanghai (45 min)', note: 'Frequentissimi. Lasciate i bagagli in un locker alla stazione (~20 yuan).' },
+          { time: 'Pomeriggio', label: 'Il Bund (Waitan) — lungofiume storico', note: '26 edifici coloniali di fronte alla skyline futuristica di Pudong: Shanghai Tower (632 m, 2° più alta al mondo), Pearl Tower, Jin Mao. Il contrasto coloniale vs post-moderno è la sintesi della Cina contemporanea.' },
+          { time: '17:00', label: 'Tianzifang o French Concession (facoltativo)', note: 'Labirinto di vicoli della concessione francese con gallerie e design cinese contemporaneo. Ideale per last-minute shopping.' },
+          { time: 'Sera', label: 'Ultima cena in Cina — Xintiandi', note: 'Per un finale indimenticabile: cocktail sul rooftop del Sir Elly\'s (10° piano) con vista diretta sul Bund illuminato.' },
+          { time: '22:00', label: 'Partenza per Aeroporto Pudong PVG', note: 'Metro Line 2 diretta (~1h) o taxi (~200 yuan). Arrivate in aeroporto entro le 23:00.' },
+          { time: '01:30', label: 'Decollo Shanghai PVG → Milano MXP ✈️', note: 'Fine di un viaggio straordinario. Avrete visto in 18 giorni: la capitale imperiale, la terracotta, i panda, le montagne di Avatar, il lago di Marco Polo e la città più moderna del mondo.' },
+        ],
+        tip: { title: 'Tornerete cambiati', text: 'Quasi tre settimane in Cina non è solo visitare posti. È confrontarsi con 5.000 anni di civiltà e una modernità che in alcuni settori ha già superato l\'Occidente. I ragazzi torneranno con una prospettiva che nessuna scuola può dare. Buon viaggio!' }
+      },
+    ]
+  },
+};
+
+// ── STATE ──
+let currentCity = null;
+let currentDay = 0;
+
+// ── CHECKLIST PERSISTENCE ──
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  saveChecklist();
+}
+function saveChecklist() {
+  const items = document.querySelectorAll('.check-item');
+  const state = Array.from(items).map(i => i.classList.contains('done'));
+  localStorage.setItem('checklist', JSON.stringify(state));
+}
+function loadChecklist() {
+  const saved = localStorage.getItem('checklist');
+  if (!saved) return;
+  const state = JSON.parse(saved);
+  const items = document.querySelectorAll('.check-item');
+  items.forEach((el, i) => { if (state[i]) el.classList.add('done'); });
+}
+
+// ── NAVIGATION ──
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  document.getElementById('tab-' + id)?.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function openCity(cityId) {
+  currentCity = cityId;
+  currentDay = 0;
+  const city = CITIES[cityId];
+
+  // Update topbar
+  document.getElementById('topbar-city-name').textContent = city.name;
+  document.getElementById('topbar-city-dates').textContent = city.dates;
+
+  // Build day nav
+  const nav = document.getElementById('day-nav');
+  nav.innerHTML = city.days.map((d, i) =>
+    `<div class="day-pill ${i===0?'active':''}" onclick="switchDay(${i})">${d.label}</div>`
+  ).join('');
+
+  // Build day contents
+  const contents = document.getElementById('day-contents');
+  contents.innerHTML = city.days.map((d, i) => buildDay(d, i)).join('');
+
+  // Show city tab in nav
+  document.getElementById('tab-city').style.display = 'flex';
+  document.getElementById('tab-city').querySelector('span:last-child').textContent = city.name;
+
+  showView('city');
+  document.getElementById('tab-city').classList.add('active');
+}
+
+function buildDay(d, i) {
+  const slotsHtml = d.slots.map(s => `
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-time-tag">${s.time}</div>
+        <div class="tl-label">${s.label}</div>
+        ${s.note ? `<div class="tl-note">${s.note}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const tipHtml = d.tip ? `
+    <div class="tip-box">
+      <div class="tip-title">${d.tip.title}</div>
+      <div class="tip-text">${d.tip.text}</div>
+    </div>
+  ` : '';
+
+  return `
+    <div class="day-content ${i===0?'active':''}" id="day-${i}">
+      <span class="day-badge badge-${d.badgeKind}">${d.badge}</span>
+      <div class="day-title">${d.title}</div>
+      <div class="day-date">${d.date}</div>
+      ${d.intro ? `<div class="day-intro">${d.intro}</div>` : ''}
+      <div class="timeline">${slotsHtml}</div>
+      ${tipHtml}
+    </div>
+  `;
+}
+
+function switchDay(i) {
+  currentDay = i;
+  document.querySelectorAll('.day-pill').forEach((p, idx) => p.classList.toggle('active', idx===i));
+  document.querySelectorAll('.day-content').forEach((c, idx) => c.classList.toggle('active', idx===i));
+  // Scroll to content area (below nav)
+  const navH = document.querySelector('.city-topbar').offsetHeight + document.querySelector('.day-nav-wrap').offsetHeight;
+  window.scrollTo({ top: navH, behavior: 'smooth' });
+}
+
+function goHome() {
+  showView('home');
+  document.getElementById('tab-city').style.display = 'none';
+}
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  loadChecklist();
+});
+</script>
+</body>
+</html>
