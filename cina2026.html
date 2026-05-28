@@ -368,23 +368,7 @@ body {
 .nav-tab.active { color: var(--accent); }
 .nav-icon { font-size: 20px; line-height: 1; }
 
-/* ══════════════════════════════════════
-   INSTALL BANNER
-══════════════════════════════════════ */
-.install-banner {
-  margin: 0 20px 16px;
-  padding: 12px 14px;
-  background: var(--accent-dim);
-  border: 1px solid rgba(201,169,110,0.25);
-  border-radius: var(--radius-sm);
-  display: flex; gap: 10px; align-items: flex-start;
-}
-.install-icon { font-size: 18px; flex-shrink: 0; }
-.install-text { font-size: 12px; color: rgba(201,169,110,0.9); line-height: 1.6; }
-.install-close {
-  margin-left: auto; font-size: 16px;
-  color: var(--accent); cursor: pointer; flex-shrink: 0; padding: 0 2px;
-}
+
 </style>
 </head>
 <body>
@@ -431,12 +415,6 @@ body {
     <span class="route-city">MXP</span>
   </div>
 
-  <div id="install-banner" class="install-banner">
-    <span class="install-icon">📲</span>
-    <span class="install-text"><b>Installa sull'iPhone:</b> tocca <b>Condividi</b> → <b>Aggiungi a Home</b> per usarla come app, anche offline.</span>
-    <span class="install-close" onclick="document.getElementById('install-banner').style.display='none'">×</span>
-  </div>
-
   <div class="section-label">Seleziona una tappa</div>
   <div class="city-cards">
 
@@ -444,7 +422,7 @@ body {
       <div class="city-card-icon" style="background:rgba(201,169,110,0.1)">🏯</div>
       <div class="city-card-body">
         <div class="city-card-name">Pechino</div>
-        <div class="city-card-meta">23 – 27 luglio · Muraglia, Città Proibita, Hutong</div>
+        <div class="city-card-meta">23 – 26 luglio · Muraglia, Città Proibita, treno notturno</div>
       </div>
       <div class="city-card-nights">4 notti</div>
       <div class="city-card-arrow">›</div>
@@ -503,9 +481,8 @@ body {
   </div>
 
   <div class="note-card">
-    <div class="note-label">Promemoria treni AV</div>
-    <div class="note-text">I treni AV sono prenotabili solo 15 giorni prima.<br>
-    🚄 Pechino→Xi'an: apre il <b>12 luglio</b><br>
+    <div class="note-label">Trasferimenti</div>
+    <div class="note-text">🌙 Pechino→Xi'an: <b>PRENOTATO ✓</b> (26/7 ore 20:42)<br>
     🚄 Xi'an→Chengdu: apre il <b>15 luglio</b><br>
     🚄 Hangzhou→Shanghai: apre il <b>24 luglio</b></div>
   </div>
@@ -521,7 +498,7 @@ body {
     <div class="back-btn" onclick="goHome()">‹</div>
     <div class="topbar-info">
       <div class="topbar-city" id="topbar-city-name">Pechino</div>
-      <div class="topbar-dates" id="topbar-city-dates">23 – 27 luglio · 4 notti</div>
+      <div class="topbar-dates" id="topbar-city-dates">23 – 26 luglio · 3 notti + treno notturno</div>
     </div>
   </div>
   <div class="day-nav-wrap" id="day-nav"></div>
@@ -593,8 +570,8 @@ body {
     <div class="check-item" onclick="toggleCheck(this)">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
-        <div class="check-label">Treno AV Pechino (Beijingxi) → Xi'an (Xi'anbei)</div>
-        <div class="check-meta">27 luglio · Vendita apre 12 luglio alle 08:00 · Trip.com o 12306.cn</div>
+        <div class="check-label">Treno notturno Pechino → Xi'an: PRENOTATO ✓</div>
+        <div class="check-meta">Prenotaz. n. 1381036024436534 · 26/7 ore 20:42 Beijingxi → 27/7 ore 08:35 Xi'anbei · 286,28 € · 4 passeggeri</div>
       </div>
       <span class="urgency urgency-soon">12 lug</span>
     </div>
@@ -633,8 +610,8 @@ body {
     <div class="check-item" onclick="toggleCheck(this)">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
-        <div class="check-label">Anatra alla pechinese — Dadong o Quanjude</div>
-        <div class="check-meta">Ristorante · 2-3 settimane prima · Sera 24 luglio</div>
+        <div class="check-label">Tour Tiananmen + Città Proibita + Museo Tesoro: PRENOTATO ✓</div>
+        <div class="check-meta">Prenotaz. n. 1381036021632892 · 24 luglio · 110,81 € · gruppo ristretto in inglese/spagnolo</div>
       </div>
       <span class="urgency urgency-later">Presto</span>
     </div>
@@ -735,7 +712,7 @@ body {
 <script>
 const CITIES = {
   beijing: {
-    name: 'Pechino', dates: '23 – 27 luglio · 4 notti',
+    name: 'Pechino', dates: '23 – 26 luglio · 3 notti + treno notturno',
     days: [
       {
         label: '23 lug', badge: 'Arrivo', badgeKind: 'arrival',
@@ -751,18 +728,18 @@ const CITIES = {
         tip: { title: 'Connettività', text: 'Acquistate una SIM locale all\'aeroporto (China Mobile). Attivate subito la VPN prima di uscire dall\'area arrivi: è l\'unico momento in cui potete scaricarla senza problemi.' }
       },
       {
-        label: '24 lug', badge: 'Giornata piena', badgeKind: 'full',
-        title: 'Città Proibita e Hutong',
+        label: '24 lug', badge: 'Tour guidato', badgeKind: 'show',
+        title: 'Tour guidato — Tiananmen, Città Proibita e Museo del Tesoro',
         date: 'Giovedì 24 luglio',
-        intro: 'La Città Proibita fu la residenza imperiale per quasi 500 anni e ospita 9.999 stanze — una in meno del Palazzo Celeste, riservato agli dei.',
+        intro: 'Tour di gruppo ristretto prenotato (n. 1381036021632892) con guida in inglese o spagnolo. Piazza Tiananmen, Città Proibita e Museo del Tesoro Imperiale — il cuore storico di Pechino in una giornata.',
         slots: [
-          { time: '08:15', label: 'Piazza Tiananmen → ingresso Città Proibita', note: 'Ingresso dalla Porta Meridionale. Il biglietto include il Tesoro Imperiale e la collezione di orologi — non saltateli.' },
-          { time: '08:30', label: 'Visita Città Proibita — almeno 3 ore', note: 'Percorso: Porta del Meriggio → Sala Armonia Suprema → Giardino Imperiale. Audioguida in italiano disponibile.' },
-          { time: 'Pranzo', label: 'Jingshan Park — vista aerea sulla Città Proibita', note: 'Salite sulla collina: tutta la Città Proibita ai vostri piedi. La foto più bella di Pechino.' },
-          { time: 'Pomeriggio', label: 'Hutong di Nanluoguxiang — giro in risciò', note: 'Vicoli storici della dinastia Yuan (1200 d.C.). Il risciò (~30 yuan/persona) copre i vicoli secondari.' },
-          { time: 'Sera', label: 'Cena con Anatra alla Pechinese', note: 'Quanjude (fondato 1864) o Dadong. Prenotate! La pelle croccante si mangia con crepes, salsa hoisin e cipollotto.' },
+          { time: 'Mattina', label: 'Tour guidato — Piazza Tiananmen e Città Proibita', note: 'Ingresso dalla Porta Meridionale sotto il ritratto di Mao. La guida darà contesto a tutto — la Città Proibita senza spiegazioni è solo un insieme di cortili. Calcolate 3 ore minimo.' },
+          { time: 'Metà matt.', label: 'Museo del Tesoro Imperiale (incluso nel tour)', note: 'Gioielli, abiti cerimoniali e oggetti imperiali. Spesso trascurato dai visitatori autonomi — con la guida è uno dei momenti più ricchi della giornata.' },
+          { time: 'Pranzo', label: 'Fine tour — pranzo autonomo in zona', note: 'Jingshan Park è a due passi: salite sulla collina per la vista aerea sulla Città Proibita appena visitata. La foto più bella di Pechino.' },
+          { time: 'Pomeriggio', label: 'Hutong di Nanluoguxiang — giro in risciò', note: 'I vicoli storici della dinastia Yuan (1200 d.C.). Il risciò è il modo migliore con il caldo — circa 30 yuan/persona.' },
+          { time: 'Sera', label: 'Cena con anatra alla pechinese', note: 'Quanjude (fondato 1864) o Dadong. Prenotate il tavolo! Pelle croccante con crepes, salsa hoisin e cipollotto.' },
         ],
-        tip: { title: 'Lo sapevate?', text: 'Fu costruita tra il 1406 e il 1420 da oltre 1 milione di lavoratori. Il rosso delle mura simboleggia prosperità, il giallo dei tetti era riservato all\'imperatore — vietato ai comuni mortali.' }
+        tip: { title: 'Prenotazione confermata', text: 'Tour di gruppo ristretto · n. 1381036021632892 · 110,81 € · 4 persone · 24 luglio. Guida in inglese o spagnolo inclusa. Portate acqua e scarpe comode.' }
       },
       {
         label: '25 lug', badge: 'Giornata piena', badgeKind: 'full',
@@ -781,18 +758,20 @@ const CITIES = {
         tip: { title: 'Curiosità', text: 'La Muraglia NON si vede dallo spazio ad occhio nudo — troppo sottile. Lo confermò l\'astronauta cinese Yang Liwei nel 2003. Nelle fondamenta sono sepolti i resti di migliaia di operai morti durante la costruzione.' }
       },
       {
-        label: '26 lug', badge: 'Giornata piena', badgeKind: 'full',
-        title: 'Summer Palace e 798 Art District',
+        label: '26 lug', badge: 'Treno notturno', badgeKind: 'travel',
+        title: 'Summer Palace — poi cena e treno notturno per Xi\'an',
         date: 'Sabato 26 luglio',
-        intro: 'L\'ultima giornata a Pechino combina la grandiosità imperiale del palazzo estivo con l\'energia creativa del distretto artistico più interessante della Cina.',
+        intro: 'Ultima giornata a Pechino. Mattina al palazzo estivo imperiale, poi rientro con calma, cena anticipata e partenza con il treno notturno per Xi\'an.',
         slots: [
-          { time: '08:30', label: 'Summer Palace (Yiheyuan)', note: '3 km² di giardini e il Lago Kunming. Il Corridoio Lungo (728 m) è decorato con 14.000 dipinti — ogni pannello è una storia diversa.' },
+          { time: '08:30', label: 'Summer Palace (Yiheyuan)', note: '3 km² di giardini e il Lago Kunming. Il Corridoio Lungo (728 m) è decorato con 14.000 dipinti. Giro in barca consigliato.' },
           { time: '11:00', label: 'Barca sul Lago Kunming', note: 'Vista sul Ponte dei Diciassette Archi — uno dei capolavori architettonici del palazzo.' },
-          { time: 'Pranzo', label: 'Pranzo nei pressi del Summer Palace', note: 'Riso fritto con uova (蛋炒饭) — semplice ma perfetto.' },
-          { time: 'Pomeriggio', label: '798 Art District (Dashanzi)', note: 'Ex fabbrica militare anni \'50 → distretto di arte contemporanea. 200+ gallerie, murales, caffè design. I ragazzi adoreranno.' },
-          { time: 'Sera', label: 'Cena libera e preparazione bagagli', note: 'Domani treno per Xi\'an — preparate le valigie.' },
+          { time: 'Pranzo', label: 'Pranzo e rientro in hotel', note: 'Rientrate nel primo pomeriggio per avere tempo per i bagagli senza fretta.' },
+          { time: 'Pomeriggio', label: 'Preparazione bagagli', note: 'Preparate le valigie con calma. Tenete separato uno zaino per la notte in treno: documenti, spazzolino, cambio, snack, cuffie, felpa (i treni cinesi sono freddi di notte).' },
+          { time: '18:00', label: 'Cena anticipata vicino all\'hotel', note: 'Cenatela con calma entro le 19:00. Evitate ristoranti lontani dalla metro che porta a Beijingxi.' },
+          { time: '19:30', label: 'Partenza per Beijing West Station (Beijingxi)', note: 'Metro Linea 9 diretta — circa 30-40 min dal centro. Arrivate in stazione almeno 45 min prima: i controlli bagagli e sicurezza sono obbligatori in tutte le stazioni cinesi.' },
+          { time: '20:42', label: 'Partenza treno notturno Beijingxi → Xi\'an 🌙', note: 'Prenotaz. n. 1381036024436534 · 4 passeggeri · arrivo 27/7 ore 08:35 a Xi\'anbei. Durata ~12 ore. Cuccette comode — portate tappi per le orecchie.' },
         ],
-        tip: { title: 'Da non perdere al 798', text: 'La galleria UCCA è la più importante del distretto. Cercate la scultura "Forever" di Ai Weiwei (biciclette saldate) e il murale gigante all\'ingresso nord. Ingresso UCCA ~100 yuan.' }
+        tip: { title: 'Prenotazione confermata', text: 'Treno notturno Beijingxi → Xi\'anbei · n. 1381036024436534 · 286,28 € · Mazzucchelli Michela + 3 · Partenza 26/7 ore 20:42 · Arrivo 27/7 ore 08:35.' }
       },
     ]
   },
@@ -801,16 +780,19 @@ const CITIES = {
     name: "Xi'an", dates: '27 – 30 luglio · 3 notti',
     days: [
       {
-        label: '27 lug', badge: 'Trasferimento', badgeKind: 'travel',
-        title: "Treno per Xi'an",
+        label: '27 lug', badge: 'Arrivo', badgeKind: 'arrival',
+        title: "Arrivo a Xi'an — mattina tranquilla",
         date: 'Domenica 27 luglio',
-        intro: "Xi'an fu per secoli la capitale dell'Impero e il capolinea della Via della Seta. 2.000 anni fa tutti i mercanti verso l'Europa passavano da qui.",
+        intro: "Arrivate a Xi'an dopo una notte in treno. Nessuna fretta — avete tutta la giornata. Mattina tranquilla per recuperare, poi nel pomeriggio le Mura Antiche e la sera il Muslim Quarter.",
         slots: [
-          { time: 'Mattina', label: "Treno AV Beijingxi → Xi'anbei (4h30)", note: 'I treni AV raggiungono 350 km/h. Sedetevi sul lato destro del senso di marcia per i panorami migliori.' },
-          { time: 'Pomeriggio', label: 'Check-in + Mura Antiche in bicicletta', note: 'Le mura medievali più intatte della Cina: 14 km di perimetro, 12 m di altezza. Bici a noleggio sul posto (~45 yuan/2h).' },
-          { time: 'Sera', label: 'Muslim Quarter (Huimin Jie) — cena', note: 'Roujiamo (panino con manzo speziato, l\'hamburger cinese), yangrou paomo, biangbiang noodles — gli spaghetti con il carattere da 58 tratti!' },
+          { time: '08:35', label: "Arrivo a Xi'anbei dal treno notturno", note: 'Metro Linea 4 da Xi\'anbei verso il centro — circa 30-40 minuti. Comoda e diretta.' },
+          { time: '09:30', label: 'Check-in hotel — deposito bagagli', note: 'La camera probabilmente non è ancora pronta. Lasciate i bagagli in custodia. Prendetevi il tempo che serve.' },
+          { time: 'Mattina', label: 'Colazione con calma e passeggiata leggera', note: 'Trovate un caffè vicino all\'hotel. Esplorate i dintorni a piedi senza meta precisa — avete dormito su un treno.' },
+          { time: 'Pranzo', label: "Primo pranzo a Xi'an — cucina locale", note: 'Roujiamo (il "hamburger cinese" con manzo brasato) e biangbiang noodles — gli spaghetti con il carattere più complesso della lingua cinese (58 tratti!).' },
+          { time: 'Pomeriggio', label: 'Mura Antiche di Xi\'an in bicicletta', note: 'Le mura medievali più intatte della Cina: 14 km di perimetro, 12 m di altezza. Bici a noleggio (~45 yuan/2h). Rilassante e scenografico.' },
+          { time: 'Sera', label: 'Muslim Quarter (Huimin Jie) — cena', note: '70.000 musulmani Hui vivono qui da 1.000 anni. Roujiamo, yangrou paomo, biangbiang noodles. Il battesimo gastronomico di Xi\'an.' },
         ],
-        tip: { title: 'La Via della Seta', text: "Xi'an era il capolinea est della Via della Seta — la rete commerciale che per 1.500 anni collegò Cina e Roma. Il buddismo arrivò in Cina proprio lungo questa rotta." }
+        tip: { title: 'Notte in treno', text: "Arriverete con sonno arretrato — non esagerate il primo giorno. Le Mura in bici sono perfette: rilassanti, all'aria aperta, nessuna fila. Il Muslim Quarter di sera è vivace ma non stancante." }
       },
       {
         label: '28 lug', badge: 'Giornata piena', badgeKind: 'full',
