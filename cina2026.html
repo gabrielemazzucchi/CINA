@@ -781,46 +781,49 @@ const CITIES = {
     days: [
       {
         label: '27 lug', badge: 'Arrivo', badgeKind: 'arrival',
-        title: "Arrivo a Xi'an — mattina tranquilla",
+        title: "Arrivo a Xi'an — itinerario a piedi",
         date: 'Domenica 27 luglio',
-        intro: "Arrivate a Xi'an dopo una notte in treno. Nessuna fretta — avete tutta la giornata. Mattina tranquilla per recuperare, poi nel pomeriggio le Mura Antiche e la sera il Muslim Quarter.",
+        intro: "Arrivate da una notte in treno. Mattina tranquilla per recuperare, poi nel pomeriggio l'itinerario a piedi Lonely Planet nel cuore storico di Xi'an: 6,5 km, 4 ore, dal Mercato Alimentare fino al Parco Lianhu.",
         slots: [
-          { time: '08:35', label: "Arrivo a Xi'anbei dal treno notturno", note: 'Metro Linea 4 da Xi\'anbei verso il centro — circa 30-40 minuti. Comoda e diretta.' },
-          { time: '09:30', label: 'Check-in hotel — deposito bagagli', note: 'La camera probabilmente non è ancora pronta. Lasciate i bagagli in custodia. Prendetevi il tempo che serve.' },
-          { time: 'Mattina', label: 'Colazione con calma e passeggiata leggera', note: 'Trovate un caffè vicino all\'hotel. Esplorate i dintorni a piedi senza meta precisa — avete dormito su un treno.' },
-          { time: 'Pranzo', label: "Primo pranzo a Xi'an — cucina locale", note: 'Roujiamo (il "hamburger cinese" con manzo brasato) e biangbiang noodles — gli spaghetti con il carattere più complesso della lingua cinese (58 tratti!).' },
-          { time: 'Pomeriggio', label: 'Mura Antiche di Xi\'an in bicicletta', note: 'Le mura medievali più intatte della Cina: 14 km di perimetro, 12 m di altezza. Bici a noleggio (~45 yuan/2h). Rilassante e scenografico.' },
-          { time: 'Sera', label: 'Muslim Quarter (Huimin Jie) — cena', note: '70.000 musulmani Hui vivono qui da 1.000 anni. Roujiamo, yangrou paomo, biangbiang noodles. Il battesimo gastronomico di Xi\'an.' },
+          { time: '08:35', label: "Arrivo a Xi'anbei dal treno notturno", note: 'Metro Linea 4 da Xi\'anbei verso il centro — circa 30-40 minuti.' },
+          { time: '09:30', label: 'Check-in hotel — deposito bagagli', note: 'La camera probabilmente non è pronta. Lasciate i bagagli in custodia e prendetevi il tempo che serve.' },
+          { time: 'Mattina', label: 'Colazione con calma e passeggiata leggera', note: 'Nessuna fretta — avete dormito su un treno. Esplorate i dintorni dell\'hotel a piedi.' },
+          { time: 'Pranzo', label: "Primo pranzo a Xi'an", note: 'Roujiamo (il "hamburger cinese" con manzo brasato) e biangbiang noodles — gli spaghetti con il carattere da 58 tratti!' },
+          { time: '14:00', label: 'Itinerario LP a piedi — 6,5 km / 4 ore', note: 'Partenza dall\'Antico Mercato Alimentare (Jianguomen). Tappe: Museo Foresta di Stele → Torre della Campana → Torre del Tamburo → Grande Corte di Gao → Mercato di Xiyang → Grande Moschea → Parco Lianhu → Tempio Guangren.' },
+          { time: '18:00', label: 'Fine itinerario — cena nel Muslim Quarter', note: 'Siete già nel quartiere! Roujiamo, yangrou paomo, biangbiang noodles. Il battesimo gastronomico di Xi\'an.' },
         ],
-        tip: { title: 'Notte in treno', text: "Arriverete con sonno arretrato — non esagerate il primo giorno. Le Mura in bici sono perfette: rilassanti, all'aria aperta, nessuna fila. Il Muslim Quarter di sera è vivace ma non stancante." }
+        tip: { title: 'Consiglio', text: "Partite non prima delle 14:00 — il caldo di luglio nelle prime ore del pomeriggio è intenso. Alle 18:00 il Muslim Quarter si anima e siete già lì, senza dover fare spostamenti." }
       },
       {
         label: '28 lug', badge: 'Giornata piena', badgeKind: 'full',
-        title: 'Esercito di Terracotta',
+        title: 'Esercito di Terracotta + Mausoleo Qin + Mura',
         date: 'Lunedì 28 luglio',
-        intro: 'Scoperto nel 1974 da contadini che scavano un pozzo. 8.000 soldati in terracotta, tutti con volti diversi, sepolti per 2.200 anni a guardia del primo imperatore della Cina.',
+        intro: 'La giornata più storica di Xi\'an. Mattina ai Guerrieri di Terracotta, poi a piedi al Mausoleo dell\'imperatore — sono adiacenti. Nel pomeriggio le Mura Antiche in bicicletta.',
         slots: [
-          { time: '07:45', label: 'Partenza per il sito (30-40 min)', note: 'Con prenotazione online si entra subito. Senza: code fino a 2 ore in agosto.' },
-          { time: '08:30', label: 'Fossa 1 — la più grande e spettacolare', note: '6.000 guerrieri in formazione su 230 metri. L\'impatto visivo è schiacciante. Erano tutti colorati — il contatto con l\'aria li ha ossidati in pochi minuti.' },
-          { time: '10:00', label: 'Fossa 2 e Fossa 3', note: 'Fossa 2: cavalleria e arcieri. Fossa 3: il quartier generale con i generali. Nel museo: due carri in bronzo a grandezza reale.' },
-          { time: 'Pranzo', label: 'Pranzo in zona', note: 'Liangpi — noodles freddi di grano con salsa di sesamo, tipici della cucina Shaanxi.' },
-          { time: 'Pomeriggio', label: 'Grande Moschea + Pagoda Grande Oca Selvatica', note: 'La moschea (742 d.C.): architettura cinese ma è una moschea — i minareti sembrano pagode. Capolavoro di sintesi culturale.' },
-          { time: 'Sera', label: 'Spettacolo Danza Tang (facoltativo)', note: 'Danze imperiali della dinastia Tang con costumi sontuosi. Tang Dynasty Theatre o Shaanxi Grand Opera.' },
+          { time: '07:45', label: 'Partenza per i Guerrieri di Terracotta (30-40 min)', note: 'Con prenotazione online si entra subito. Senza: code fino a 2 ore in agosto.' },
+          { time: '08:30', label: 'Fossa 1 — la più grande e spettacolare', note: '6.000 guerrieri in formazione su 230 metri. Erano tutti colorati — il contatto con l\'aria li ha ossidati in pochi minuti dopo lo scavo.' },
+          { time: '10:00', label: 'Fossa 2 e Fossa 3 + Museo carri di bronzo', note: 'Fossa 2: cavalleria e arcieri. Fossa 3: il quartier generale. Nel museo: due carri in bronzo a grandezza reale — meraviglie ingegneristiche.' },
+          { time: '11:30', label: 'Mausoleo di Qin Shi Huang (1,5 km a piedi)', note: 'Il tumulo funerario piramidale dell\'imperatore: 51 m di altezza. La tomba è ancora sigillata — le misurazioni rilevano mercurio 100 volte superiore alla norma.' },
+          { time: 'Pranzo', label: 'Pranzo in zona', note: 'Liangpi — noodles freddi con salsa di sesamo, tipici della cucina Shaanxi.' },
+          { time: 'Pomeriggio', label: 'Rientro in città — Mura Antiche in bicicletta', note: 'Le mura medievali più intatte della Cina: 14 km di perimetro, 12 m di altezza. Bici a noleggio all\'ingresso (~45 yuan/2h). Vista sulla città da una prospettiva unica.' },
+          { time: 'Sera', label: 'Cena libera — zona centro', note: 'Serata tranquilla dopo una giornata intensa.' },
         ],
-        tip: { title: 'La vera tomba è ancora chiusa', text: "Qin Shi Huang (221 a.C.) unificò la Cina standardizzando pesi, misure e scrittura. La sua tomba è a 1,5 km dai guerrieri: le misurazioni rilevano livelli di mercurio 100 volte superiori alla norma, confermando i testi storici." }
+        tip: { title: 'La vera tomba è ancora chiusa', text: "Qin Shi Huang unificò la Cina nel 221 a.C. La sua tomba — a 1,5 km dai guerrieri — è ancora sigillata: inside, strutture enormi e livelli di mercurio anomali confermano i testi storici antichi." }
       },
       {
         label: '29 lug', badge: 'Giornata piena', badgeKind: 'full',
-        title: 'Mausoleo Qin e Terme di Huaqing',
+        title: 'Pagoda Grande Oca Selvatica + Danza Tang',
         date: 'Martedì 29 luglio',
-        intro: "L'ultima giornata a Xi'an esplora il tumulo funerario dell'imperatore e le terme imperiali dove nacque una delle storie d'amore più celebri della storia cinese.",
+        intro: "L'ultima giornata a Xi'an è più rilassata. Mattina alla Pagoda e dintorni, pomeriggio libero per shopping e souvenir, sera con lo spettacolo della Danza Tang.",
         slots: [
-          { time: 'Mattina', label: 'Mausoleo di Qin Shi Huang', note: '51 metri di altezza, 355 m di lato. La tomba è ancora sigillata — dentro, strutture enormi e livelli di mercurio anomali confermano le descrizioni storiche.' },
-          { time: 'Pranzo', label: 'Pranzo locale in zona', note: 'Rou jia mo autentico — molto migliore della versione turistizzata del Muslim Quarter.' },
-          { time: 'Pomeriggio', label: 'Terme di Huaqing (Huaqing Chi)', note: "Le terme dell'imperatore Tang Xuanzong e della concubina Yang Guifei — la storia d'amore imperiale per eccellenza. Le vasche in marmo bianco sono ancora visibili." },
-          { time: 'Sera', label: 'Ultima cena nel Muslim Quarter + bagagli', note: 'Ultima occasione per i biangbiang noodles. Comprate le repliche in miniatura dei guerrieri dai produttori locali.' },
+          { time: 'Mattina', label: 'Pagoda della Grande Oca Selvatica (Da Yan Ta)', note: 'Costruita nel 652 d.C. per conservare le scritture buddiste portate dall\'India dal monaco Xuanzang — lo stesso personaggio de "Il Viaggio in Occidente". Alta 64 m, si può salire per la vista sulla città.' },
+          { time: 'Pranzo', label: 'Pranzo in zona', note: 'Il quartiere intorno alla Pagoda ha ottimi ristoranti locali.' },
+          { time: 'Pomeriggio', label: 'Giro libero — shopping e souvenir', note: 'Ultima occasione per acquisti: repliche in miniatura dei guerrieri, tè locale, artigianato. Mercato Yongxingfang per street food e souvenir autentici.' },
+          { time: '19:00', label: 'Cena anticipata', note: 'Cenatela prima dello spettacolo — in zona centro, vicino al teatro.' },
+          { time: '20:00', label: 'Danza Tang — spettacolo serale 🎭', note: 'Danze di corte della dinastia Tang (618-907 d.C.) con costumi sontuosi e musica tradizionale. Durata circa 1 ora. Tang Dynasty Theatre o Shaanxi Grand Opera House — prenotate in anticipo.' },
+          { time: 'Dopo', label: 'Rientro hotel e preparazione bagagli', note: 'Domani treno per Chengdu.' },
         ],
-        tip: { title: 'Yang Guifei', text: "Considerata una delle 'Quattro Bellezze' della storia cinese. Le terme di Huaqing furono costruite dall'imperatore in suo onore, con vasche private profumate. La loro storia tragica è immortalata nel poema 'Canzone del Dolore Eterno' di Bai Juyi." }
+        tip: { title: 'Xuanzang — il monaco viaggiatore', text: 'La Pagoda fu costruita per lui. Xuanzang (602-664 d.C.) viaggiò da solo dall\'India alla Cina per 17 anni portando 657 testi buddisti. Il suo viaggio ispirò "Il Viaggio in Occidente" — il romanzo più letto della letteratura cinese, con il Re Scimmia Sun Wukong come protagonista.' }
       },
     ]
   },
