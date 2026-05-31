@@ -216,6 +216,17 @@ body {
   border-color: var(--accent);
 }
 
+.swipe-hint {
+  display: none;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 20px 2px;
+}
+.swipe-hint.show { display: block; }
+
 /* Day content */
 .day-content { display: none; padding: 16px 20px; }
 .day-content.active { display: block; animation: fadeUp 0.2s ease; }
@@ -502,6 +513,7 @@ body {
     </div>
   </div>
   <div class="day-nav-wrap" id="day-nav"></div>
+  <div class="swipe-hint" id="swipe-hint">‹ scorri per cambiare giorno ›</div>
   <div id="day-contents"></div>
 </div>
 
@@ -1064,6 +1076,10 @@ function openCity(cityId) {
   }
   nav.innerHTML = pillsHtml;
 
+  // Mostra il suggerimento di scorrimento solo se c'è più di un giorno
+  var hint = document.getElementById('swipe-hint');
+  if (hint) hint.classList.toggle('show', city.days.length > 1);
+
   // Attach pill listeners after render
   for (var i = 0; i < city.days.length; i++) {
     (function(idx) {
@@ -1108,7 +1124,22 @@ function switchDay(i) {
   for (var j = 0; j < pills.length; j++) pills[j].classList.toggle('active', j === i);
   var contents = document.querySelectorAll('.day-content');
   for (var j = 0; j < contents.length; j++) contents[j].classList.toggle('active', j === i);
+  // Porta il pill attivo in vista se la barra dei giorni scrolla
+  var active = pills[i];
+  if (active && active.scrollIntoView) {
+    try { active.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } catch (e) {}
+  }
   window.scrollTo(0, 0);
+}
+
+// Cambia giorno con delta (+1 successivo, -1 precedente), entro i limiti
+function goToDay(delta) {
+  if (!currentCity) return;
+  var city = CITIES[currentCity];
+  if (!city) return;
+  var target = currentDay + delta;
+  if (target < 0 || target >= city.days.length) return;
+  switchDay(target);
 }
 
 // ── ATTACH STATIC LISTENERS ON DOM READY ──
@@ -1146,6 +1177,32 @@ window.addEventListener('DOMContentLoaded', function() {
     (function(item) {
       item.addEventListener('click', function(e) { e.stopPropagation(); toggleCheck(item); });
     })(checkItems[i]);
+  }
+
+  // ── SWIPE ORIZZONTALE PER CAMBIARE GIORNO ──
+  // Si attiva solo se il movimento orizzontale prevale nettamente,
+  // così lo scroll verticale dei contenuti resta intatto.
+  var dc = document.getElementById('day-contents');
+  if (dc) {
+    var swX = 0, swY = 0, swActive = false;
+    dc.addEventListener('touchstart', function(e) {
+      if (!e.touches || e.touches.length !== 1) { swActive = false; return; }
+      swX = e.touches[0].clientX;
+      swY = e.touches[0].clientY;
+      swActive = true;
+    }, { passive: true });
+    dc.addEventListener('touchend', function(e) {
+      if (!swActive) return;
+      swActive = false;
+      var t = e.changedTouches && e.changedTouches[0];
+      if (!t) return;
+      var dx = t.clientX - swX;
+      var dy = t.clientY - swY;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        if (dx < 0) goToDay(1);    // swipe verso sinistra → giorno successivo
+        else goToDay(-1);          // swipe verso destra → giorno precedente
+      }
+    }, { passive: true });
   }
 });
 </script>
