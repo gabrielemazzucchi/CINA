@@ -375,15 +375,15 @@ body {
 
 <!-- ══ BOTTOM NAV ══ -->
 <nav class="bottom-nav">
-  <div class="nav-tab active" id="tab-home" onclick="showView('home')">
+  <div class="nav-tab active" id="tab-home" data-view="home">
     <span class="nav-icon">🗺️</span>
     <span>Viaggio</span>
   </div>
-  <div class="nav-tab" id="tab-city" onclick="showView('city')" style="display:none">
+  <div class="nav-tab" id="tab-city" data-view="city" style="display:none">
     <span class="nav-icon">📍</span>
     <span>Tappa</span>
   </div>
-  <div class="nav-tab" id="tab-checklist" onclick="showView('checklist')">
+  <div class="nav-tab" id="tab-checklist" data-view="checklist">
     <span class="nav-icon">✅</span>
     <span>Da fare</span>
   </div>
@@ -418,7 +418,7 @@ body {
   <div class="section-label">Seleziona una tappa</div>
   <div class="city-cards">
 
-    <div class="city-card" onclick="openCity('beijing')">
+    <div class="city-card" data-city="beijing">
       <div class="city-card-icon" style="background:rgba(201,169,110,0.1)">🏯</div>
       <div class="city-card-body">
         <div class="city-card-name">Pechino</div>
@@ -428,7 +428,7 @@ body {
       <div class="city-card-arrow">›</div>
     </div>
 
-    <div class="city-card" onclick="openCity('xian')">
+    <div class="city-card" data-city="xian">
       <div class="city-card-icon" style="background:rgba(232,146,74,0.1)">⚔️</div>
       <div class="city-card-body">
         <div class="city-card-name">Xi'an</div>
@@ -438,7 +438,7 @@ body {
       <div class="city-card-arrow">›</div>
     </div>
 
-    <div class="city-card" onclick="openCity('chengdu')">
+    <div class="city-card" data-city="chengdu">
       <div class="city-card-icon" style="background:rgba(109,184,136,0.1)">🐼</div>
       <div class="city-card-body">
         <div class="city-card-name">Chengdu</div>
@@ -448,7 +448,7 @@ body {
       <div class="city-card-arrow">›</div>
     </div>
 
-    <div class="city-card" onclick="openCity('zhangjiajie')">
+    <div class="city-card" data-city="zhangjiajie">
       <div class="city-card-icon" style="background:rgba(142,180,212,0.1)">🏔️</div>
       <div class="city-card-body">
         <div class="city-card-name">Zhangjiajie</div>
@@ -458,7 +458,7 @@ body {
       <div class="city-card-arrow">›</div>
     </div>
 
-    <div class="city-card" onclick="openCity('hangzhou')">
+    <div class="city-card" data-city="hangzhou">
       <div class="city-card-icon" style="background:rgba(155,135,196,0.1)">🍵</div>
       <div class="city-card-body">
         <div class="city-card-name">Hangzhou</div>
@@ -468,7 +468,7 @@ body {
       <div class="city-card-arrow">›</div>
     </div>
 
-    <div class="city-card" onclick="openCity('shanghai')">
+    <div class="city-card" data-city="shanghai">
       <div class="city-card-icon" style="background:rgba(212,118,106,0.1)">✈️</div>
       <div class="city-card-body">
         <div class="city-card-name">Shanghai</div>
@@ -495,7 +495,7 @@ body {
 ══════════════════════════════════════ -->
 <div id="view-city" class="view">
   <div class="city-topbar">
-    <div class="back-btn" onclick="goHome()">‹</div>
+    <div class="back-btn">‹</div>
     <div class="topbar-info">
       <div class="topbar-city" id="topbar-city-name">Pechino</div>
       <div class="topbar-dates" id="topbar-city-dates">23 – 26 luglio · 3 notti + treno notturno</div>
@@ -518,7 +518,7 @@ body {
   <div class="checklist-group">
     <div class="group-title">🔴 Da fare subito</div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Volo CTU → DYG (Chengdu→Zhangjiajie): PRENOTATO ✓</div>
@@ -527,7 +527,7 @@ body {
       <span class="urgency urgency-now">Ora</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Volo interno DYG → HGH (Zhangjiajie→Hangzhou)</div>
@@ -536,7 +536,7 @@ body {
       <span class="urgency urgency-now">Ora</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Città Proibita — biglietto ingresso</div>
@@ -545,7 +545,7 @@ body {
       <span class="urgency urgency-now">Ora</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Glass Bridge Zhangjiajie</div>
@@ -554,7 +554,7 @@ body {
       <span class="urgency urgency-now">Ora</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Panda Giganti Chengdu</div>
@@ -567,7 +567,7 @@ body {
   <div class="checklist-group">
     <div class="group-title">🟡 Treni AV — finestra di 15 giorni</div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Treno notturno Pechino → Xi'an: PRENOTATO ✓</div>
@@ -576,7 +576,7 @@ body {
       <span class="urgency urgency-soon">12 lug</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Treno G3139 Xi'an → Chengdu: PRENOTATO ✓</div>
@@ -585,7 +585,7 @@ body {
       <span class="urgency urgency-soon">15 lug</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Treno AV Hangzhou → Shanghai</div>
@@ -598,7 +598,7 @@ body {
   <div class="checklist-group">
     <div class="group-title">🟢 Prossime settimane</div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Muraglia Mutianyu — funivia + ingresso</div>
@@ -607,7 +607,7 @@ body {
       <span class="urgency urgency-later">Presto</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Tour Tiananmen + Città Proibita + Museo Tesoro: PRENOTATO ✓</div>
@@ -616,7 +616,7 @@ body {
       <span class="urgency urgency-later">Presto</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Esercito di Terracotta — biglietto ingresso</div>
@@ -625,7 +625,7 @@ body {
       <span class="urgency urgency-later">Presto</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Opera del Sichuan / Bian Lian — posti preferenziali</div>
@@ -634,7 +634,7 @@ body {
       <span class="urgency urgency-later">Presto</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Buddha di Leshan — biglietto ingresso</div>
@@ -643,7 +643,7 @@ body {
       <span class="urgency urgency-later">Presto</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Tianmen Fox Fairy Show — posti VIP</div>
@@ -652,7 +652,7 @@ body {
       <span class="urgency urgency-later">Presto</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Tianmen Mountain — biglietto funivia</div>
@@ -661,7 +661,7 @@ body {
       <span class="urgency urgency-later">Presto</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Sunset Cruise Lago Ovest Hangzhou</div>
@@ -674,7 +674,7 @@ body {
   <div class="checklist-group">
     <div class="group-title">📱 Prima di partire</div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">VPN installata (ExpressVPN o NordVPN)</div>
@@ -683,7 +683,7 @@ body {
       <span class="urgency urgency-now">Ora</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">WeChat, Didi, Alipay installati</div>
@@ -692,7 +692,7 @@ body {
       <span class="urgency urgency-now">Ora</span>
     </div>
 
-    <div class="check-item" onclick="toggleCheck(this)">
+    <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
         <div class="check-label">Verifica esenzione visto per italiani</div>
@@ -1030,31 +1030,30 @@ function loadChecklist() {
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('view-' + id).classList.add('active');
-  document.getElementById('tab-' + id)?.classList.add('active');
+  var viewEl = document.getElementById('view-' + id);
+  if (viewEl) viewEl.classList.add('active');
+  var tabEl = document.getElementById('tab-' + id);
+  if (tabEl) tabEl.classList.add('active');
   window.scrollTo(0, 0);
 }
 
 function openCity(cityId) {
   currentCity = cityId;
   currentDay = 0;
-  const city = CITIES[cityId];
+  var city = CITIES[cityId];
+  if (!city) return;
 
-  // Update topbar
   document.getElementById('topbar-city-name').textContent = city.name;
   document.getElementById('topbar-city-dates').textContent = city.dates;
 
-  // Build day nav
-  const nav = document.getElementById('day-nav');
-  nav.innerHTML = city.days.map((d, i) =>
-    `<div class="day-pill ${i===0?'active':''}" onclick="switchDay(${i})">${d.label}</div>`
-  ).join('');
+  var nav = document.getElementById('day-nav');
+  nav.innerHTML = city.days.map(function(d, i) {
+    return '<div class="day-pill' + (i===0?' active':'') + '" data-day="' + i + '">' + d.label + '</div>';
+  }).join('');
 
-  // Build day contents
-  const contents = document.getElementById('day-contents');
-  contents.innerHTML = city.days.map((d, i) => buildDay(d, i)).join('');
+  var contents = document.getElementById('day-contents');
+  contents.innerHTML = city.days.map(function(d, i) { return buildDay(d, i); }).join('');
 
-  // Show city tab in nav
   document.getElementById('tab-city').style.display = 'flex';
   document.getElementById('tab-city').querySelector('span:last-child').textContent = city.name;
 
@@ -1063,43 +1062,46 @@ function openCity(cityId) {
 }
 
 function buildDay(d, i) {
-  const slotsHtml = d.slots.map(s => `
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-body">
-        <div class="tl-time-tag">${s.time}</div>
-        <div class="tl-label">${s.label}</div>
-        ${s.note ? `<div class="tl-note">${s.note}</div>` : ''}
-      </div>
-    </div>
-  `).join('');
+  var slotsHtml = d.slots.map(function(s) {
+    return '<div class="tl-item">' +
+      '<div class="tl-dot"></div>' +
+      '<div class="tl-body">' +
+        '<div class="tl-time-tag">' + s.time + '</div>' +
+        '<div class="tl-label">' + s.label + '</div>' +
+        (s.note ? '<div class="tl-note">' + s.note + '</div>' : '') +
+      '</div>' +
+    '</div>';
+  }).join('');
 
-  const tipHtml = d.tip ? `
-    <div class="tip-box">
-      <div class="tip-title">${d.tip.title}</div>
-      <div class="tip-text">${d.tip.text}</div>
-    </div>
-  ` : '';
+  var tipHtml = d.tip ?
+    '<div class="tip-box">' +
+      '<div class="tip-title">' + d.tip.title + '</div>' +
+      '<div class="tip-text">' + d.tip.text + '</div>' +
+    '</div>' : '';
 
-  return `
-    <div class="day-content ${i===0?'active':''}" id="day-${i}">
-      <span class="day-badge badge-${d.badgeKind}">${d.badge}</span>
-      <div class="day-title">${d.title}</div>
-      <div class="day-date">${d.date}</div>
-      ${d.intro ? `<div class="day-intro">${d.intro}</div>` : ''}
-      <div class="timeline">${slotsHtml}</div>
-      ${tipHtml}
-    </div>
-  `;
+  return '<div class="day-content' + (i===0?' active':'') + '" id="day-' + i + '">' +
+    '<span class="day-badge badge-' + d.badgeKind + '">' + d.badge + '</span>' +
+    '<div class="day-title">' + d.title + '</div>' +
+    '<div class="day-date">' + d.date + '</div>' +
+    (d.intro ? '<div class="day-intro">' + d.intro + '</div>' : '') +
+    '<div class="timeline">' + slotsHtml + '</div>' +
+    tipHtml +
+  '</div>';
 }
 
 function switchDay(i) {
   currentDay = i;
-  document.querySelectorAll('.day-pill').forEach((p, idx) => p.classList.toggle('active', idx===i));
-  document.querySelectorAll('.day-content').forEach((c, idx) => c.classList.toggle('active', idx===i));
-  // Scroll to content area (below nav)
-  const navH = document.querySelector('.city-topbar').offsetHeight + document.querySelector('.day-nav-wrap').offsetHeight;
-  window.scrollTo({ top: navH, behavior: 'smooth' });
+  document.querySelectorAll('.day-pill').forEach(function(p, idx) {
+    p.classList.toggle('active', idx === i);
+  });
+  document.querySelectorAll('.day-content').forEach(function(c, idx) {
+    c.classList.toggle('active', idx === i);
+  });
+  var topbar = document.querySelector('.city-topbar');
+  var daynav = document.querySelector('.day-nav-wrap');
+  if (topbar && daynav) {
+    window.scrollTo({ top: topbar.offsetHeight + daynav.offsetHeight, behavior: 'smooth' });
+  }
 }
 
 function goHome() {
@@ -1107,8 +1109,41 @@ function goHome() {
   document.getElementById('tab-city').style.display = 'none';
 }
 
+// ── EVENT DELEGATION — handles dynamically generated elements ──
+document.addEventListener('click', function(e) {
+  // City cards
+  var cityCard = e.target.closest('.city-card');
+  if (cityCard && cityCard.dataset.city) {
+    openCity(cityCard.dataset.city);
+    return;
+  }
+  // Day pills
+  var pill = e.target.closest('.day-pill');
+  if (pill && pill.dataset.day !== undefined) {
+    switchDay(parseInt(pill.dataset.day));
+    return;
+  }
+  // Back button
+  if (e.target.closest('.back-btn')) {
+    goHome();
+    return;
+  }
+  // Bottom nav tabs
+  var navTab = e.target.closest('.nav-tab');
+  if (navTab && navTab.dataset.view) {
+    showView(navTab.dataset.view);
+    return;
+  }
+  // Check items
+  var checkItem = e.target.closest('.check-item');
+  if (checkItem) {
+    toggleCheck(checkItem);
+    return;
+  }
+});
+
 // ── INIT ──
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
   loadChecklist();
 });
 </script>
