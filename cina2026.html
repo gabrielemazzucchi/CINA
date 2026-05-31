@@ -51,7 +51,7 @@ body {
 }
 
 /* ── VIEWS ── */
-.view { display: none; min-height: 100dvh; }
+.view { display: none; min-height: 100vh; }
 .view.active { display: block; }
 
 /* ── STATUS BAR SPACER ── */
@@ -1005,36 +1005,50 @@ const CITIES = {
 };
 
 // ── STATE ──
-let currentCity = null;
-let currentDay = 0;
+var currentCity = null;
+var currentDay = 0;
 
-// ── CHECKLIST PERSISTENCE ──
+// ── CHECKLIST ──
 function toggleCheck(el) {
   el.classList.toggle('done');
   saveChecklist();
 }
 function saveChecklist() {
-  const items = document.querySelectorAll('.check-item');
-  const state = Array.from(items).map(i => i.classList.contains('done'));
-  localStorage.setItem('checklist', JSON.stringify(state));
+  try {
+    var items = document.querySelectorAll('.check-item');
+    var state = [];
+    for (var i = 0; i < items.length; i++) state.push(items[i].classList.contains('done'));
+    localStorage.setItem('checklist', JSON.stringify(state));
+  } catch(e) {}
 }
 function loadChecklist() {
-  const saved = localStorage.getItem('checklist');
-  if (!saved) return;
-  const state = JSON.parse(saved);
-  const items = document.querySelectorAll('.check-item');
-  items.forEach((el, i) => { if (state[i]) el.classList.add('done'); });
+  try {
+    var saved = localStorage.getItem('checklist');
+    if (!saved) return;
+    var state = JSON.parse(saved);
+    var items = document.querySelectorAll('.check-item');
+    for (var i = 0; i < items.length; i++) { if (state[i]) items[i].classList.add('done'); }
+  } catch(e) {}
 }
 
-// ── NAVIGATION ──
+// ── STATE ──
+
 function showView(id) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  var viewEl = document.getElementById('view-' + id);
-  if (viewEl) viewEl.classList.add('active');
-  var tabEl = document.getElementById('tab-' + id);
-  if (tabEl) tabEl.classList.add('active');
+  var views = document.querySelectorAll('.view');
+  for (var i = 0; i < views.length; i++) views[i].classList.remove('active');
+  var tabs = document.querySelectorAll('.nav-tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  var v = document.getElementById('view-' + id);
+  if (v) v.classList.add('active');
+  var t = document.getElementById('tab-' + id);
+  if (t) t.classList.add('active');
   window.scrollTo(0, 0);
+}
+
+function goHome() {
+  showView('home');
+  var ct = document.getElementById('tab-city');
+  if (ct) ct.style.display = 'none';
 }
 
 function openCity(cityId) {
@@ -1046,105 +1060,102 @@ function openCity(cityId) {
   document.getElementById('topbar-city-name').textContent = city.name;
   document.getElementById('topbar-city-dates').textContent = city.dates;
 
+  // Build pills
   var nav = document.getElementById('day-nav');
-  nav.innerHTML = city.days.map(function(d, i) {
-    return '<div class="day-pill' + (i===0?' active':'') + '" data-day="' + i + '">' + d.label + '</div>';
-  }).join('');
+  var pillsHtml = '';
+  for (var i = 0; i < city.days.length; i++) {
+    pillsHtml += '<div class="day-pill' + (i===0?' active':'') + '" id="pill-' + i + '">' + city.days[i].label + '</div>';
+  }
+  nav.innerHTML = pillsHtml;
 
+  // Attach pill listeners after render
+  for (var i = 0; i < city.days.length; i++) {
+    (function(idx) {
+      var pill = document.getElementById('pill-' + idx);
+      if (pill) {
+        pill.addEventListener('click', function(e) { e.stopPropagation(); switchDay(idx); });
+        pill.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); switchDay(idx); });
+      }
+    })(i);
+  }
+
+  // Build day contents
   var contents = document.getElementById('day-contents');
-  contents.innerHTML = city.days.map(function(d, i) { return buildDay(d, i); }).join('');
+  var html = '';
+  for (var i = 0; i < city.days.length; i++) html += buildDay(city.days[i], i);
+  contents.innerHTML = html;
 
-  document.getElementById('tab-city').style.display = 'flex';
-  document.getElementById('tab-city').querySelector('span:last-child').textContent = city.name;
+  var ct = document.getElementById('tab-city');
+  if (ct) {
+    ct.style.display = 'flex';
+    var spans = ct.querySelectorAll('span');
+    if (spans.length > 1) spans[spans.length-1].textContent = city.name;
+  }
 
   showView('city');
-  document.getElementById('tab-city').classList.add('active');
+  var cityTab = document.getElementById('tab-city');
+  if (cityTab) cityTab.classList.add('active');
 }
 
 function buildDay(d, i) {
-  var slotsHtml = d.slots.map(function(s) {
-    return '<div class="tl-item">' +
-      '<div class="tl-dot"></div>' +
-      '<div class="tl-body">' +
-        '<div class="tl-time-tag">' + s.time + '</div>' +
-        '<div class="tl-label">' + s.label + '</div>' +
-        (s.note ? '<div class="tl-note">' + s.note + '</div>' : '') +
-      '</div>' +
-    '</div>';
-  }).join('');
-
-  var tipHtml = d.tip ?
-    '<div class="tip-box">' +
-      '<div class="tip-title">' + d.tip.title + '</div>' +
-      '<div class="tip-text">' + d.tip.text + '</div>' +
-    '</div>' : '';
-
-  return '<div class="day-content' + (i===0?' active':'') + '" id="day-' + i + '">' +
-    '<span class="day-badge badge-' + d.badgeKind + '">' + d.badge + '</span>' +
-    '<div class="day-title">' + d.title + '</div>' +
-    '<div class="day-date">' + d.date + '</div>' +
-    (d.intro ? '<div class="day-intro">' + d.intro + '</div>' : '') +
-    '<div class="timeline">' + slotsHtml + '</div>' +
-    tipHtml +
-  '</div>';
+  var slotsHtml = '';
+  for (var j = 0; j < d.slots.length; j++) {
+    var s = d.slots[j];
+    slotsHtml += '<div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-time-tag">' + s.time + '</div><div class="tl-label">' + s.label + '</div>' + (s.note ? '<div class="tl-note">' + s.note + '</div>' : '') + '</div></div>';
+  }
+  var tipHtml = d.tip ? '<div class="tip-box"><div class="tip-title">' + d.tip.title + '</div><div class="tip-text">' + d.tip.text + '</div></div>' : '';
+  return '<div class="day-content' + (i===0?' active':'') + '" id="day-' + i + '"><span class="day-badge badge-' + d.badgeKind + '">' + d.badge + '</span><div class="day-title">' + d.title + '</div><div class="day-date">' + d.date + '</div>' + (d.intro ? '<div class="day-intro">' + d.intro + '</div>' : '') + '<div class="timeline">' + slotsHtml + '</div>' + tipHtml + '</div>';
 }
 
 function switchDay(i) {
   currentDay = i;
-  document.querySelectorAll('.day-pill').forEach(function(p, idx) {
-    p.classList.toggle('active', idx === i);
-  });
-  document.querySelectorAll('.day-content').forEach(function(c, idx) {
-    c.classList.toggle('active', idx === i);
-  });
-  var topbar = document.querySelector('.city-topbar');
-  var daynav = document.querySelector('.day-nav-wrap');
-  if (topbar && daynav) {
-    window.scrollTo({ top: topbar.offsetHeight + daynav.offsetHeight, behavior: 'smooth' });
-  }
+  var pills = document.querySelectorAll('.day-pill');
+  for (var j = 0; j < pills.length; j++) pills[j].classList.toggle('active', j === i);
+  var contents = document.querySelectorAll('.day-content');
+  for (var j = 0; j < contents.length; j++) contents[j].classList.toggle('active', j === i);
+  window.scrollTo(0, 0);
 }
 
-function goHome() {
-  showView('home');
-  document.getElementById('tab-city').style.display = 'none';
-}
-
-// ── EVENT DELEGATION — handles dynamically generated elements ──
-document.addEventListener('click', function(e) {
-  // City cards
-  var cityCard = e.target.closest('.city-card');
-  if (cityCard && cityCard.dataset.city) {
-    openCity(cityCard.dataset.city);
-    return;
-  }
-  // Day pills
-  var pill = e.target.closest('.day-pill');
-  if (pill && pill.dataset.day !== undefined) {
-    switchDay(parseInt(pill.dataset.day));
-    return;
-  }
-  // Back button
-  if (e.target.closest('.back-btn')) {
-    goHome();
-    return;
-  }
-  // Bottom nav tabs
-  var navTab = e.target.closest('.nav-tab');
-  if (navTab && navTab.dataset.view) {
-    showView(navTab.dataset.view);
-    return;
-  }
-  // Check items
-  var checkItem = e.target.closest('.check-item');
-  if (checkItem) {
-    toggleCheck(checkItem);
-    return;
-  }
-});
-
-// ── INIT ──
+// ── ATTACH STATIC LISTENERS ON DOM READY ──
 window.addEventListener('DOMContentLoaded', function() {
   loadChecklist();
+
+  // City cards
+  var cards = document.querySelectorAll('.city-card');
+  for (var i = 0; i < cards.length; i++) {
+    (function(card) {
+      var city = card.getAttribute('data-city');
+      if (!city) return;
+      card.addEventListener('click', function(e) { e.stopPropagation(); openCity(city); });
+      card.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); openCity(city); });
+    })(cards[i]);
+  }
+
+  // Bottom nav tabs
+  var tabs = document.querySelectorAll('.nav-tab[data-view]');
+  for (var i = 0; i < tabs.length; i++) {
+    (function(tab) {
+      var view = tab.getAttribute('data-view');
+      tab.addEventListener('click', function(e) { e.stopPropagation(); showView(view); });
+      tab.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); showView(view); });
+    })(tabs[i]);
+  }
+
+  // Back button
+  var backBtn = document.querySelector('.back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', function(e) { e.stopPropagation(); goHome(); });
+    backBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); goHome(); });
+  }
+
+  // Check items
+  var checkItems = document.querySelectorAll('.check-item');
+  for (var i = 0; i < checkItems.length; i++) {
+    (function(item) {
+      item.addEventListener('click', function(e) { e.stopPropagation(); toggleCheck(item); });
+      item.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); toggleCheck(item); });
+    })(checkItems[i]);
+  }
 });
 </script>
 </body>
