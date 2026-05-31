@@ -1070,7 +1070,6 @@ function openCity(cityId) {
       var pill = document.getElementById('pill-' + idx);
       if (pill) {
         pill.addEventListener('click', function(e) { e.stopPropagation(); switchDay(idx); });
-        pill.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); switchDay(idx); });
       }
     })(i);
   }
@@ -1123,7 +1122,6 @@ window.addEventListener('DOMContentLoaded', function() {
       var city = card.getAttribute('data-city');
       if (!city) return;
       card.addEventListener('click', function(e) { e.stopPropagation(); openCity(city); });
-      card.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); openCity(city); });
     })(cards[i]);
   }
 
@@ -1133,7 +1131,6 @@ window.addEventListener('DOMContentLoaded', function() {
     (function(tab) {
       var view = tab.getAttribute('data-view');
       tab.addEventListener('click', function(e) { e.stopPropagation(); showView(view); });
-      tab.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); showView(view); });
     })(tabs[i]);
   }
 
@@ -1141,7 +1138,6 @@ window.addEventListener('DOMContentLoaded', function() {
   var backBtn = document.querySelector('.back-btn');
   if (backBtn) {
     backBtn.addEventListener('click', function(e) { e.stopPropagation(); goHome(); });
-    backBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); goHome(); });
   }
 
   // Check items
@@ -1149,7 +1145,6 @@ window.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < checkItems.length; i++) {
     (function(item) {
       item.addEventListener('click', function(e) { e.stopPropagation(); toggleCheck(item); });
-      item.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); toggleCheck(item); });
     })(checkItems[i]);
   }
 });
