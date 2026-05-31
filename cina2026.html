@@ -483,7 +483,7 @@ body {
   <div class="note-card">
     <div class="note-label">Trasferimenti</div>
     <div class="note-text">🌙 Pechino→Xi'an: <b>PRENOTATO ✓</b> (26/7 ore 20:42)<br>
-    🚄 Xi'an→Chengdu: apre il <b>15 luglio</b><br>
+    🚄 Xi'an→Chengdu: <b>PRENOTATO ✓</b> (G3139 · 30/7 ore 10:24)<br>
     🚄 Hangzhou→Shanghai: apre il <b>24 luglio</b></div>
   </div>
 
@@ -579,8 +579,8 @@ body {
     <div class="check-item" onclick="toggleCheck(this)">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
-        <div class="check-label">Treno AV Xi'an → Chengdu</div>
-        <div class="check-meta">30 luglio · Vendita apre 15 luglio alle 08:00</div>
+        <div class="check-label">Treno G3139 Xi'an → Chengdu: PRENOTATO ✓</div>
+        <div class="check-meta">30 luglio · partenza 10:24 da Xi'anbei · arrivo 13:53 Chengdudong · 2ª classe · Biglietti in emissione dal 16 luglio ore 10:30</div>
       </div>
       <span class="urgency urgency-soon">15 lug</span>
     </div>
@@ -833,11 +833,17 @@ const CITIES = {
     days: [
       {
         label: '30 lug', badge: 'Trasferimento', badgeKind: 'travel',
-        title: 'Treno per Chengdu',
-        date: 'Mercoledì 30 luglio',
+        title: "Treno G3139 Xi'an → Chengdu",
+        date: 'Giovedì 30 luglio',
         intro: 'Chengdu è la capitale del Sichuan — la regione più vitale della Cina. I Chengdunesi sono famosi per il buon cibo, il mahjong nelle tea house e un ritmo di vita quasi mediterraneo.',
         slots: [
-          { time: 'Mattina', label: "Treno AV Xi'an → Chengdu (3h30)", note: 'Il treno attraversa le montagne del Qinling — paesaggi spettacolari di valli e foreste.' },
+          { time: '09:30', label: "Partenza per Xi'anbei Station", note: "Metro Linea 4 diretta verso Xi'anbei — arrivate in stazione almeno 30 minuti prima della partenza." },
+          { time: '10:24', label: "Treno G3139 Xi'anbei → Chengdudong · 2ª classe", note: "In attesa emissione biglietti dal 16 luglio ore 10:30 (acquisto automatico). Durata 3h29 — il treno attraversa le montagne del Qinling con paesaggi spettacolari." },
+          { time: '13:53', label: 'Arrivo Chengdudong — check-in Holiday Inn Express Tianfu Square', note: 'Metro da Chengdudong verso il centro. Hotel prenotato 30 luglio/2 agosto.' },
+          { time: 'Pomeriggio', label: 'Kuanzhai Alley (Vicoli Larghi e Stretti)', note: 'Tre vicoli storici della dinastia Qing perfettamente restaurati. Tea house, ristoranti, opera del Sichuan all\'aperto.' },
+          { time: 'Sera', label: 'Hot pot Sichuan — prima esperienza! 🌶️', note: 'Chiedete la versione "yuan yang" (metà piccante, metà normale). Il pepe di Sichuan crea un intorpidimento unico — niente di simile esiste in Italia.' },
+        ],
+        tip: { title: 'Treno prenotato ✓', text: "G3139 · Xi'anbei → Chengdudong · 30 luglio · partenza 10:24 · arrivo 13:53 · 2ª classe. Biglietti in emissione automatica dal 16 luglio ore 10:30." }
           { time: 'Pomeriggio', label: 'Check-in + Kuanzhai Alley (Vicoli Larghi e Stretti)', note: 'Tre vicoli storici della dinastia Qing (XVIII sec.) perfettamente restaurati. Tea house, ristoranti, opera del Sichuan all\'aperto.' },
           { time: 'Sera', label: 'Hot pot Sichuan — prima esperienza! 🌶️', note: 'Chiedete la versione "yuan yang" (metà piccante, metà normale). Il pepe di Sichuan crea un intorpidimento unico — niente di simile esiste in Italia.' },
         ],
