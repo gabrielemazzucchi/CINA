@@ -422,7 +422,7 @@ body {
       <div class="city-card-icon" style="background:rgba(201,169,110,0.1)">🏯</div>
       <div class="city-card-body">
         <div class="city-card-name">Pechino</div>
-        <div class="city-card-meta">23 – 26 luglio · Muraglia, Città Proibita, treno notturno</div>
+        <div class="city-card-meta">23 – 26 luglio · Legendale Hotel Beijing</div>
       </div>
       <div class="city-card-nights">4 notti</div>
       <div class="city-card-arrow">›</div>
@@ -432,7 +432,7 @@ body {
       <div class="city-card-icon" style="background:rgba(232,146,74,0.1)">⚔️</div>
       <div class="city-card-body">
         <div class="city-card-name">Xi'an</div>
-        <div class="city-card-meta">27 – 30 luglio · Terracotta, Mura, Muslim Quarter</div>
+        <div class="city-card-meta">27 – 30 luglio · Hantang Inn Hostel Xi'an</div>
       </div>
       <div class="city-card-nights">3 notti</div>
       <div class="city-card-arrow">›</div>
@@ -442,7 +442,7 @@ body {
       <div class="city-card-icon" style="background:rgba(109,184,136,0.1)">🐼</div>
       <div class="city-card-body">
         <div class="city-card-name">Chengdu</div>
-        <div class="city-card-meta">30 luglio – 2 agosto · Panda, Leshan, Opera</div>
+        <div class="city-card-meta">30 luglio – 2 agosto · Holiday Inn Express Tianfu Square</div>
       </div>
       <div class="city-card-nights">3 notti</div>
       <div class="city-card-arrow">›</div>
@@ -452,7 +452,7 @@ body {
       <div class="city-card-icon" style="background:rgba(142,180,212,0.1)">🏔️</div>
       <div class="city-card-body">
         <div class="city-card-name">Zhangjiajie</div>
-        <div class="city-card-meta">2 – 6 agosto · Avatar Mountains, Tianmen, Fox Fairy</div>
+        <div class="city-card-meta">2 – 6 agosto · Cozy Boutique Hotel</div>
       </div>
       <div class="city-card-nights">4 notti</div>
       <div class="city-card-arrow">›</div>
@@ -462,7 +462,7 @@ body {
       <div class="city-card-icon" style="background:rgba(155,135,196,0.1)">🍵</div>
       <div class="city-card-body">
         <div class="city-card-name">Hangzhou</div>
-        <div class="city-card-meta">6 – 8 agosto · Lago Ovest, Lingyin, Tè Longjing</div>
+        <div class="city-card-meta">6 – 8 agosto · EBO Hotel Hangzhou Wulin</div>
       </div>
       <div class="city-card-nights">2 notti</div>
       <div class="city-card-arrow">›</div>
@@ -521,8 +521,8 @@ body {
     <div class="check-item" onclick="toggleCheck(this)">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
-        <div class="check-label">Volo interno CTU → DYG (Chengdu→Zhangjiajie)</div>
-        <div class="check-meta">Prenotare subito — agosto esaurisce rapidamente</div>
+        <div class="check-label">Volo CTU → DYG (Chengdu→Zhangjiajie): PRENOTATO ✓</div>
+        <div class="check-meta">Sichuan Airlines 3U6781 · Prenotaz. 1381036012963276 · Codice QKB39P · 2/8 ore 11:35 → 13:00</div>
       </div>
       <span class="urgency urgency-now">Ora</span>
     </div>
@@ -712,7 +712,7 @@ body {
 <script>
 const CITIES = {
   beijing: {
-    name: 'Pechino', dates: '23 – 26 luglio · 3 notti + treno notturno',
+    name: 'Pechino', dates: 'Legendale Hotel · 23 – 26 luglio · 3 notti',
     days: [
       {
         label: '23 lug', badge: 'Arrivo', badgeKind: 'arrival',
@@ -777,7 +777,7 @@ const CITIES = {
   },
 
   xian: {
-    name: "Xi'an", dates: '27 – 30 luglio · 3 notti',
+    name: "Xi'an", dates: "Hantang Inn Hostel · 27 – 30 luglio · 3 notti",
     days: [
       {
         label: '27 lug', badge: 'Arrivo', badgeKind: 'arrival',
@@ -829,7 +829,7 @@ const CITIES = {
   },
 
   chengdu: {
-    name: 'Chengdu', dates: '30 luglio – 2 agosto · 3 notti',
+    name: 'Chengdu', dates: 'Holiday Inn Express Tianfu Sq. · 30 lug – 2 ago · 3 notti',
     days: [
       {
         label: '30 lug', badge: 'Trasferimento', badgeKind: 'travel',
@@ -875,20 +875,22 @@ const CITIES = {
   },
 
   zhangjiajie: {
-    name: 'Zhangjiajie', dates: '2 – 6 agosto · 4 notti',
+    name: 'Zhangjiajie', dates: 'Cozy Boutique Hotel · 2 – 6 agosto · 4 notti',
     days: [
       {
         label: '2 ago', badge: 'Trasferimento', badgeKind: 'travel',
-        title: 'Volo per Zhangjiajie',
+        title: 'Volo per Zhangjiajie — Sichuan Airlines',
         date: 'Domenica 2 agosto',
-        intro: 'Migliaia di colonne di quarzo-arenaria alte fino a 300 metri che emergono dalla foresta. James Cameron le visitò prima di Avatar — le "Montagne Fluttuanti" sono modellate su queste colonne.',
+        intro: 'Migliaia di colonne di quarzo-arenaria alte fino a 300 metri che emergono dalla foresta. James Cameron le visitò prima di Avatar — le "Montagne Fluttuanti" sono modellate esattamente su queste colonne.',
         slots: [
-          { time: 'Mattina', label: 'Volo Chengdu CTU → Zhangjiajie DYG (1h30)', note: 'L\'atterraggio tra le montagne è già spettacolare di per sé — specialmente con nuvole basse.' },
-          { time: 'Arrivo', label: 'Transfer verso Wulingyuan (40 min)', note: 'Base per il National Forest Park. Hotel vicino all\'ingresso del parco per minimizzare i trasferimenti mattutini.' },
-          { time: 'Pomeriggio', label: 'Check-in e Xibu Street', note: 'Comprate snack, acqua e barrette energetiche per i giorni nel parco. Prenotate il Fox Fairy Show per il 4 agosto.' },
+          { time: '09:30', label: 'Partenza per Aeroporto Chengdu Tianfu T2', note: 'Arrivate in aeroporto almeno 2 ore prima. Il Tianfu è il nuovo aeroporto internazionale di Chengdu — più lontano dal centro, calcolate 40-50 min di taxi/Didi.' },
+          { time: '11:35', label: 'Volo Sichuan Airlines 3U6781 — Chengdu Tianfu T2 → Zhangjiajie Hehua T2', note: 'Prenotaz. n. 1381036012963276 · Codice QKB39P · Economy · Bagaglio stiva 20 kg/persona. Durata ~1h25.' },
+          { time: '13:00', label: 'Arrivo Aeroporto Zhangjiajie Hehua T2', note: 'L\'atterraggio tra le montagne è già spettacolare di per sé — specialmente con nuvole basse.' },
+          { time: '13:45', label: 'Transfer verso Wulingyuan e check-in Cozy Boutique Hotel', note: 'Circa 40 min dall\'aeroporto. Hotel prenotato 2/6 agosto — base perfetta per il National Forest Park.' },
+          { time: 'Pomeriggio', label: 'Riposo e Xibu Street', note: 'Comprate snack, acqua e barrette energetiche per i giorni nel parco. Prenotate il Fox Fairy Show per il 4 agosto se non ancora fatto.' },
           { time: 'Sera', label: 'Cena con cucina Hunan', note: 'Più acida e affumicata rispetto al Sichuan. Carne di maiale affumicata (腊肉), tofu puzzolente fritto (臭豆腐). Riposate — domani è intenso.' },
         ],
-        tip: { title: 'Cosa aspettarsi', text: 'Luglio-agosto: caldo umido (30-35°C), possibili temporali pomeridiani brevi, nebbia mattutina sulle colonne (che le rende ancora più misteriose). Portate scarpe con suola antisdrucciolo — i sentieri sono scivolosi.' }
+        tip: { title: 'Volo confermato ✓', text: 'Sichuan Airlines 3U6781 · Prenotaz. 1381036012963276 · Codice QKB39P · 4 passeggeri · Economy · Bagaglio a mano 8 kg/persona, stiva 20 kg/persona.' }
       },
       {
         label: '3 ago', badge: 'Giornata piena', badgeKind: 'full',
@@ -940,7 +942,7 @@ const CITIES = {
   },
 
   hangzhou: {
-    name: 'Hangzhou', dates: '6 – 8 agosto · 2 notti',
+    name: 'Hangzhou', dates: 'EBO Hotel Wulin · 6 – 8 agosto · 2 notti',
     days: [
       {
         label: '6 ago', badge: 'Trasferimento', badgeKind: 'travel',
