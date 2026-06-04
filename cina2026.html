@@ -420,8 +420,7 @@ body {
     <span class="route-city">Pechino</span><span class="route-arrow">🚄</span>
     <span class="route-city">Xi'an</span><span class="route-arrow">🚄</span>
     <span class="route-city">Chengdu</span><span class="route-arrow">✈</span>
-    <span class="route-city">Zhangjiajie</span><span class="route-arrow">✈</span>
-    <span class="route-city">Hangzhou</span><span class="route-arrow">🚄</span>
+    <span class="route-city">Zhangjiajie</span><span class="route-arrow">→</span>
     <span class="route-city">Shanghai</span><span class="route-arrow">✈</span>
     <span class="route-city">MXP</span>
   </div>
@@ -469,23 +468,13 @@ body {
       <div class="city-card-arrow">›</div>
     </div>
 
-    <div class="city-card" data-city="hangzhou">
-      <div class="city-card-icon" style="background:rgba(155,135,196,0.1)">🍵</div>
-      <div class="city-card-body">
-        <div class="city-card-name">Hangzhou</div>
-        <div class="city-card-meta">6 – 8 agosto · EBO Hotel Hangzhou Wulin</div>
-      </div>
-      <div class="city-card-nights">2 notti</div>
-      <div class="city-card-arrow">›</div>
-    </div>
-
     <div class="city-card" data-city="shanghai">
-      <div class="city-card-icon" style="background:rgba(212,118,106,0.1)">✈️</div>
+      <div class="city-card-icon" style="background:rgba(212,118,106,0.1)">🏙️</div>
       <div class="city-card-body">
         <div class="city-card-name">Shanghai</div>
-        <div class="city-card-meta">8 agosto · Bund, cena, volo notturno per MXP</div>
+        <div class="city-card-meta">6 – 8 agosto · Bund, Pudong, città vecchia</div>
       </div>
-      <div class="city-card-nights">Transito</div>
+      <div class="city-card-nights">2 notti</div>
       <div class="city-card-arrow">›</div>
     </div>
 
@@ -495,7 +484,7 @@ body {
     <div class="note-label">Trasferimenti</div>
     <div class="note-text">🌙 Pechino→Xi'an: <b>PRENOTATO ✓</b> (26/7 ore 20:42)<br>
     🚄 Xi'an→Chengdu: <b>PRENOTATO ✓</b> (G3139 · 30/7 ore 10:24)<br>
-    🚄 Hangzhou→Shanghai: apre il <b>24 luglio</b></div>
+    ✈/🚄 Zhangjiajie→Shanghai: <b>da decidere</b> (volo diretto ~2h o treno ~7h)</div>
   </div>
 
   <div style="height: 80px"></div>
@@ -542,8 +531,8 @@ body {
     <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
-        <div class="check-label">Volo interno DYG → HGH (Zhangjiajie→Hangzhou)</div>
-        <div class="check-meta">Prenotare subito — agosto esaurisce rapidamente</div>
+        <div class="check-label">Trasferimento Zhangjiajie → Shanghai (volo o treno)</div>
+        <div class="check-meta">Decidere e prenotare: volo DYG→PVG ~2h (pomeriggio/sera) o treno ~7h da Zhangjiajie Ovest</div>
       </div>
       <span class="urgency urgency-now">Ora</span>
     </div>
@@ -595,15 +584,6 @@ body {
         <div class="check-meta">30 luglio · partenza 10:24 da Xi'anbei · arrivo 13:53 Chengdudong · 2ª classe · Biglietti in emissione dal 16 luglio ore 10:30</div>
       </div>
       <span class="urgency urgency-soon">15 lug</span>
-    </div>
-
-    <div class="check-item">
-      <div class="check-box"><span class="check-tick">✓</span></div>
-      <div class="check-body">
-        <div class="check-label">Treno AV Hangzhou → Shanghai</div>
-        <div class="check-meta">8 agosto · Vendita apre 24 luglio · Frequentissimi, meno urgente</div>
-      </div>
-      <span class="urgency urgency-soon">24 lug</span>
     </div>
   </div>
 
@@ -676,8 +656,8 @@ body {
     <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
-        <div class="check-label">Sunset Cruise Lago Ovest Hangzhou</div>
-        <div class="check-meta">1 settimana prima · Sera 7 agosto</div>
+        <div class="check-label">Shanghai Tower osservatorio / crociera Huangpu</div>
+        <div class="check-meta">Facoltativo · 1 settimana prima · 6-7 agosto</div>
       </div>
       <span class="urgency urgency-later">Presto</span>
     </div>
@@ -912,16 +892,14 @@ const CITIES = {
         date: 'Lunedì 3 agosto',
         intro: 'Oltre 3.000 colonne di quarzite formatesi 380 milioni di anni fa dall\'erosione di un antico altopiano marino. Alcune si elevano per oltre 400 metri.',
         slots: [
-          { time: '06:45', label: 'Hotel → Southeast Gate (a due passi)', note: 'La Southeast Gate (武陵源东南门) è praticamente accanto al Cozy Boutique Hotel: pochi minuti a piedi o in taxi. Arrivate per l\'apertura delle 7:00 e portate i passaporti, servono per il biglietto.' },
-          { time: '07:00', label: 'Ingresso Southeast Gate + navetta interna', note: 'Biglietto multi-giorno, navette incluse: lo riuserete il 5 ago. Prendete la navetta ecologica fino alla stazione bassa dell\'ascensore Bailong.' },
-          { time: '07:45', label: 'Ascensore Bailong — su in 2 minuti', note: '326 m di risalita verticale nella roccia, fino a oltre 1.000 m, nell\'area di Yuanjiajie. Salite presto: a metà mattina le code crescono.' },
-          { time: '08:15', label: 'Yuanjiajie — Avatar Hallelujah Mountain 🎬', note: 'Il belvedere a 1.048 m: la colonna scelta da Cameron per Avatar. Con la nebbia mattutina sembra fluttuare. Anello panoramico quasi tutto in piano.' },
-          { time: '09:30', label: 'Ponte nel Cielo (Tianxia No.1 Bridge)', note: 'Ponte naturale tra due colonne a 357 m — il più alto del mondo. Lì accanto: Enchanting Terrace e Backyard Garden.' },
-          { time: '11:00', label: 'Navetta in quota verso Tianzi Mountain', note: 'Dalla fermata Three-way Intersection / Wulong Village la linea in quota porta a Tianzi via Viewing Terrace, Dianjiang Terrace e Shentang Bay.' },
-          { time: 'Pranzo', label: 'Pranzo in quota (Tianzi o Yuanjiajie)', note: 'Punti ristoro semplici sulle vette. Tenete qualche snack di scorta.' },
+          { time: '06:45', label: 'Hotel → East Gate di Wulingyuan', note: 'Ingresso prenotato dalla guida (fascia 7:00-8:00), vicino all\'hotel. Biglietto pacchetto 499 (navette, funivie e ascensore inclusi). Portate i passaporti.' },
+          { time: '07:00', label: 'Ingresso East Gate + Ascensore Bailong su', note: 'Route B: si sale subito col Bailong (326 m in 2 min) fino all\'altopiano di Yuanjiajie. Salite presto, a metà mattina le code crescono.' },
+          { time: 'Opzione', label: 'Golden Whip Stream — facoltativo, all\'ingresso 🐒', note: 'Gratis, incluso nel biglietto: il sentiero parte dalla stazione bassa del Bailong. Se ti va un assaggio (rocce iconiche e macachi), cammina 30-60 min prima di salire. La Route B scende dal lato Tianzi, quindi conviene farlo ora. Decidi sul posto.' },
+          { time: '08:15', label: 'Yuanjiajie — Avatar Hallelujah Mountain 🎬', note: 'Il belvedere a 1.048 m: la colonna scelta da Cameron per Avatar. Lì accanto il Ponte nel Cielo (Tianxia No.1 Bridge), ponte naturale a 357 m. Anello panoramico quasi in piano.' },
+          { time: '~10:00', label: 'Yangjiajie — pinnacoli spettacolari', note: 'Area meno affollata di Yuanjiajie ma altrettanto scenografica, con guglie aguzze e belvedere a strapiombo. Funivia inclusa nel pacchetto.' },
+          { time: 'Pranzo', label: 'Pranzo in quota', note: 'Punti ristoro semplici sulle vette. Tenete qualche snack di scorta.' },
           { time: 'Pomeriggio', label: 'Tianzi Mountain — il "mare di nuvole"', note: 'Helong Park, Imperial Brush Peaks, Shentang Bay. In estate le nuvole basse riempiono le valli: vista surreale e fotograficamente straordinaria.' },
-          { time: '~14:30', label: 'Discesa con l\'ascensore Bailong', note: 'Da Tianzi tornate verso il Bailong con la navetta in quota e scendete a Shuiraosimen sul fondovalle. Scendete entro metà pomeriggio per evitare le code.' },
-          { time: 'Tardo pom.', label: 'Golden Whip Stream (Jinbian Xi) 🐒', note: 'Chiusura dolce: sentiero in piano lungo il torrente cristallino, ombra e macachi selvatici (non dategli cibo). Uscita vicino alla Southeast Gate, a due passi dall\'hotel. Fate il tratto che preferite.' },
+          { time: '~15:00', label: 'Discesa con la funivia di Tianzi', note: 'Route B chiude scendendo dal lato Tianzi, sul versante di Wulingyuan: comodo per rientrare in hotel. Scendete entro metà pomeriggio per evitare le code.' },
         ],
         tip: { title: 'Cameron a Zhangjiajie', text: 'Nel 2008 Cameron visitò il parco con un piccolo team. Rimase così colpito che Pandora prese vita da queste colonne. Curiosità: il direttore del parco andò al cinema a vedere Avatar e non riconobbe subito le proprie montagne — erano troppo surreali anche per lui.' }
       },
@@ -952,65 +930,53 @@ const CITIES = {
           { time: 'Mattina', label: 'Grand Canyon + Glass Bridge 🌉', note: 'Solo ~40 min dall\'hotel (auto/Didi). Il Route B include il ponte di vetro più lungo del mondo (430 m, 300 m d\'altezza), la cima del canyon e la discesa nella gola: ~3 ore. Biglietto a parte dal parco, da prendere in anticipo; passaporti necessari.' },
           { time: 'Pranzo', label: 'Pranzo in zona Baofeng Lake', note: 'Ristoranti locali più semplici e autentici rispetto all\'interno del parco principale.' },
           { time: 'Pomeriggio', label: 'Baofeng Lake — giro in barca 🚣', note: 'Lago verde smeraldo circondato da colonne altissime — il colore viene da alghe e dalla luce sull\'acqua minerale. Barche nel silenzio tra le pareti rocciose, ~45 minuti. A pochi km dall\'hotel: rientro comodo per i bagagli.' },
-          { time: 'Sera', label: 'Ultima sera a Zhangjiajie — bagagli', note: 'Comprate tè selvatico locale e erbe medicinali — ottimi regali. Domani mattina treno per Hangzhou: verificate da quale stazione (Zhangjiajie città o Zhangjiajie Ovest) e calcolate il transfer da Wulingyuan.' },
+          { time: 'Sera', label: 'Ultima sera a Zhangjiajie — bagagli', note: 'Comprate tè selvatico locale e erbe medicinali — ottimi regali. Domani trasferimento a Shanghai: volo diretto (~2h, da Zhangjiajie DYG) o treno (~7h, da Zhangjiajie Ovest), da decidere. I voli partono nel pomeriggio, quindi la mattina del 6 resta libera a Wulingyuan.' },
         ],
         tip: { title: 'Il Glass Bridge', text: 'Aprì nel 2016 con 80.000 visitatori il primo giorno — dovette chiudere dopo 13 giorni per soprannumero. I pannelli di vetro sono spessi 4 cm (triplo strato). Se vedete qualcuno "spaccarli": è uno show organizzato. Il vetro regge.' }
       },
     ]
   },
 
-  hangzhou: {
-    name: 'Hangzhou', dates: 'EBO Hotel Wulin · 6 – 8 agosto · 2 notti',
+  shanghai: {
+    name: 'Shanghai', dates: 'Shanghai · 6 – 8 agosto · 2 notti',
     days: [
       {
         label: '6 ago', badge: 'Trasferimento', badgeKind: 'travel',
-        title: 'Volo per Hangzhou — Lago Ovest',
+        title: 'Da Zhangjiajie a Shanghai — sera sul Bund',
         date: 'Giovedì 6 agosto',
-        intro: 'Marco Polo la definì "la città più nobile e magnifica del mondo". Il Lago Ovest — UNESCO dal 2011 — mantiene intatta quella magia dopo 700 anni.',
+        intro: 'Si lascia la natura per la metropoli. Mezza giornata di viaggio, poi il primo impatto con Shanghai: la skyline di Pudong illuminata vista dal Bund, una delle più spettacolari al mondo.',
         slots: [
-          { time: 'Mattina', label: 'Volo Zhangjiajie DYG → Hangzhou HGH (2 ore)', note: 'Arrivate con 2 ore di anticipo — aeroporto piccolo ma con controlli approfonditi.' },
-          { time: 'Arrivo', label: 'Transfer e check-in vicino al Lago Ovest', note: 'Hotel entro 10 minuti a piedi dal lago. Zona Nanshan Road con vista.' },
-          { time: 'Pomeriggio', label: 'Prima passeggiata sul Lago Ovest (Xi Hu)', note: '6,5 km² circondati da colline, pagode, templi. Bai Causeway e Su Causeway le passeggiate storiche. Barca verso l\'Isola di Xiaoyingzhou consigliata.' },
-          { time: 'Sera', label: 'Tramonto sul lago e cena', note: 'Dongpo Rou: maiale brasato nel vino di riso per 4 ore — inventato dal poeta Su Dongpo nell\'XI secolo. Il piatto simbolo di Hangzhou.' },
+          { time: 'Mattina', label: 'Trasferimento Zhangjiajie → Shanghai', note: 'Da decidere: volo diretto DYG → Pudong (PVG) ~2h, oppure treno veloce dalla stazione Zhangjiajie Ovest ~7h. I voli partono nel pomeriggio (il primo ~14:40, arrivo ~16:45), quindi la mattina resta libera a Wulingyuan.' },
+          { time: 'Pomeriggio', label: 'Arrivo a Shanghai e check-in', note: 'Conviene un hotel in centro — zona Bund / Nanjing Road / People\'s Square: tutto a piedi o con la metro (efficiente, cartelli in inglese). Atterrate al Pudong, lo stesso aeroporto da cui ripartite l\'8.' },
+          { time: 'Sera', label: 'Il Bund (Waitan) di notte 🌃', note: '26 edifici coloniali affacciati sulla skyline futuristica di Pudong — Shanghai Tower (632 m, 2ª al mondo), Pearl Tower, Jin Mao — illuminata. Passeggiata sul lungofiume e cena. Opzionale: crociera serale sul fiume Huangpu (~40 min).' },
         ],
-        tip: { title: 'Il Lago Ovest nella cultura cinese', text: 'Soggetto di migliaia di poesie. Il poeta Su Dongpo scrisse: "Se paragono il Lago Ovest alla bella Xi Shi, sia la pioggia che il sole la adornano egualmente". La leggenda della Serpente Bianca — storia d\'amore tra uno studioso e uno spirito del lago — è ambientata proprio qui.' }
+        tip: { title: 'La metro di Shanghai', text: 'Tra le più estese al mondo (oltre 800 km). Usate Alipay/WeChat col QR, niente contanti. Dall\'aeroporto, il Maglev tocca i 430 km/h: in 7 minuti fa quello che il taxi fa in 50.' }
       },
       {
         label: '7 ago', badge: 'Giornata piena', badgeKind: 'full',
-        title: 'Tempio Lingyin e Tè Longjing',
+        title: 'Shanghai classica e moderna',
         date: 'Venerdì 7 agosto',
-        intro: 'L\'ultima giornata turistica completa del viaggio: uno dei templi buddhisti più importanti della Cina e le piantagioni del tè più pregiato al mondo.',
+        intro: 'La giornata completa in città: dal giardino classico cinese alla città vecchia, fino ai grattacieli di Pudong e ai viali alberati della Concessione Francese.',
         slots: [
-          { time: 'Mattina', label: 'Tempio Buddhista di Lingyin (fondato 326 d.C.)', note: 'Le Grotte di Feilai Feng: 470 sculture rupestri dal X al XIV sec. La leggenda: la collina "volò dall\'India" portata dal monaco fondatore Huili.' },
-          { time: '10:30', label: 'Sala del Grande Buddha', note: 'Statua di 19,6 m scolpita nel 1956 nel legno di canfora. Atmosfera raccolta con incenso e monaci in preghiera. Rispettate il silenzio.' },
-          { time: 'Pranzo', label: 'Pranzo in zona Longjing', note: '"Longjing xiaren": gamberetti saltati con foglie di tè fresco — il piatto più rappresentativo della cucina di Hangzhou.' },
-          { time: 'Pomeriggio', label: 'Piantagioni di Tè Longjing 🍃', note: 'Il tè verde più pregiato al mondo. Visita con degustazione guidata. Comprate il tè direttamente dai produttori: costa 10 volte meno che in città, qualità superiore.' },
-          { time: '17:00', label: 'Sunset Cruise sul Lago Ovest 🌅', note: 'I loti in piena fioritura in agosto riflettono la luce arancione del sole. Su Causeway sullo sfondo. Uno dei momenti più sereni dell\'intero viaggio.' },
-          { time: 'Sera', label: 'Cena e ultima passeggiata sul lago', note: 'Zona Nanshan Road. Ultima notte a Hangzhou — domani trasferimento verso Shanghai.' },
+          { time: 'Mattina', label: 'Yu Garden e Città Vecchia', note: 'Giardino classico Ming (1559): rocce, padiglioni, carpe koi. Intorno il bazar del Tempio del Dio della Città. Provate gli xiaolongbao (ravioli al vapore col brodo) da Nanxiang, dove sono nati.' },
+          { time: 'Mezzogiorno', label: 'Nanjing Road e People\'s Square', note: 'La via dello shopping più famosa della Cina. Lì accanto lo Shanghai Museum (gratuito, tra i migliori al mondo per bronzi e ceramiche) per una pausa culturale al fresco.' },
+          { time: 'Pomeriggio', label: 'Pudong — skyline e Shanghai Tower', note: 'Attraversate a Lujiazui: salita allo Shanghai Tower (118° piano, ascensore tra i più veloci al mondo) o allo Shanghai World Financial Center. Vista a perdita d\'occhio sulla megalopoli.' },
+          { time: 'Sera', label: 'Concessione Francese — Xintiandi / Wukang Road', note: 'Viali alberati, ville art déco, caffè e ristoranti: atmosfera opposta al resto della città. Cena qui, dal raviolo di strada al rooftop.' },
         ],
-        tip: { title: 'Il Tè Longjing', text: 'L\'imperatore Qianlong (XVIII sec.) designò 18 cespugli specifici come "cespugli imperiali". Oggi esistono ancora: nel 2023 la vendita dei primi 500 grammi di queste piante ha raggiunto 180.000 yuan (circa 23.000€).' }
+        tip: { title: 'Due città in una', text: 'Shanghai fu divisa in concessioni straniere (francese, britannica, americana) dal 1843: da qui i viali "europei" della ex Concessione Francese, a un isolato dai grattacieli. È sempre stata la finestra della Cina sul mondo — e oggi è la sua vetrina più moderna.' }
       },
-    ]
-  },
-
-  shanghai: {
-    name: 'Shanghai', dates: '8 agosto · transito finale',
-    days: [
       {
         label: '8 ago', badge: 'Rientro', badgeKind: 'return',
-        title: 'Shanghai e volo notturno per Milano',
+        title: 'Ultimo giorno e volo per Milano',
         date: 'Sabato 8 agosto',
-        intro: 'Non è una tappa turistica — è la porta d\'uscita. Ma il pomeriggio sul Bund chiude il viaggio con il paesaggio urbano più spettacolare della Cina.',
+        intro: 'Ultima giornata in Cina, con calma: ciò che non avete ancora visto, qualche acquisto, e poi il volo notturno verso casa.',
         slots: [
-          { time: 'Mattina', label: 'Check-out a Hangzhou', note: 'Mattina bloccata per il trasferimento verso Shanghai.' },
-          { time: 'Mezzogiorno', label: 'Treno AV Hangzhou → Shanghai (45 min)', note: 'Frequentissimi. Lasciate i bagagli in un locker alla stazione (~20 yuan).' },
-          { time: 'Pomeriggio', label: 'Il Bund (Waitan) — lungofiume storico', note: '26 edifici coloniali di fronte alla skyline futuristica di Pudong: Shanghai Tower (632 m, 2° più alta al mondo), Pearl Tower, Jin Mao. Il contrasto coloniale vs post-moderno è la sintesi della Cina contemporanea.' },
-          { time: '17:00', label: 'Tianzifang o French Concession (facoltativo)', note: 'Labirinto di vicoli della concessione francese con gallerie e design cinese contemporaneo. Ideale per last-minute shopping.' },
-          { time: 'Sera', label: 'Ultima cena in Cina — Xintiandi', note: 'Per un finale indimenticabile: cocktail sul rooftop del Sir Elly\'s (10° piano) con vista diretta sul Bund illuminato.' },
-          { time: '22:00', label: 'Partenza per Aeroporto Pudong PVG', note: 'Metro Line 2 diretta (~1h) o taxi (~200 yuan). Arrivate in aeroporto entro le 23:00.' },
-          { time: '01:30', label: 'Decollo Shanghai PVG → Milano MXP ✈️', note: 'Fine di un viaggio straordinario. Avrete visto in 18 giorni: la capitale imperiale, la terracotta, i panda, le montagne di Avatar, il lago di Marco Polo e la città più moderna del mondo.' },
+          { time: 'Mattina', label: 'Ultimi angoli di Shanghai', note: 'A scelta: il Tempio di Jing\'an, il quartiere artistico di Tianzifang, l\'M50 art district o le ultime compere. Ritmo leggero dopo settimane intense.' },
+          { time: 'Opzione', label: 'Gita a Zhujiajiao o Suzhou (facoltativo)', note: 'Per un ultimo assaggio di "Cina classica" con canali e giardini: Zhujiajiao (borgo d\'acqua, ~1h) o Suzhou (giardini UNESCO, ~30 min in treno veloce). Solo se partite presto e con i bagagli già gestiti.' },
+          { time: 'Pomeriggio', label: 'Check-out e trasferimento al Pudong (PVG)', note: 'Dal centro ~50 min in taxi/metro, oppure il Maglev (7 min da Longyang Road). Per un volo internazionale presentatevi ~3h prima.' },
+          { time: 'Sera', label: 'Volo Shanghai PVG → Milano MXP ✈️', note: 'Fine di un viaggio straordinario: la capitale imperiale, la terracotta, i panda, le montagne di Avatar e la metropoli più moderna del mondo.' },
         ],
-        tip: { title: 'Tornerete cambiati', text: 'Quasi tre settimane in Cina non è solo visitare posti. È confrontarsi con 5.000 anni di civiltà e una modernità che in alcuni settori ha già superato l\'Occidente. I ragazzi torneranno con una prospettiva che nessuna scuola può dare. Buon viaggio!' }
+        tip: { title: 'Tornerete cambiati', text: 'Quasi tre settimane in Cina non è solo visitare posti: è confrontarsi con 5.000 anni di civiltà e una modernità che in alcuni settori ha superato l\'Occidente. I ragazzi torneranno con una prospettiva che nessuna scuola può dare. Buon viaggio!' }
       },
     ]
   },
