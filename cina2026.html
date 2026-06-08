@@ -712,7 +712,7 @@ const CITIES = {
         date: 'Mercoledì 23 luglio',
         intro: 'Dopo quasi 10 ore di volo notturno da Milano, atterrate all\'alba. Prima regola anti jet-lag: non dormite appena arrivati. Adattatevi subito all\'orario locale (+6h rispetto all\'Italia).',
         slots: [
-          { time: '05:40', label: 'Arrivo PEK — controlli e transfer hotel', note: 'Taxi ufficiale o Didi verso il centro. Evitate i tassisti abusivi. Tragitto: ~40-50 min.' },
+          { time: '05:40', label: 'Arrivo PEK — controlli e transfer hotel', note: 'Volo Air China MXP→PEK (conf. MTR7NH, biglietto 999-2425034642), partito da Milano il 22 lug alle 13:30. All\'arrivo: taxi ufficiale o Didi verso il centro, evitate i tassisti abusivi. Tragitto ~40-50 min.' },
           { time: 'Mattina', label: 'Check-in, doccia e riposo breve', note: 'Un\'ora è sufficiente — non dormite di più o non riuscirete ad addormentarvi la sera.' },
           { time: 'Pomeriggio', label: 'Prima passeggiata: Piazza Tiananmen', note: 'La piazza più grande del mondo (440.000 m²). La Città Proibita la visitiamo domani, freschi.' },
           { time: 'Sera', label: 'Cena a Wangfujing Snack Street', note: 'Street food pechinese: baozi, jianbing, zhajiangmian. I ragazzi possono osare con gli scorpioni fritti!' },
@@ -932,7 +932,7 @@ const CITIES = {
           { time: 'Sera', label: 'Cena, recupero bagagli e transfer all\'aeroporto DYG', note: 'Comprate tè selvatico ed erbe locali — ottimi regali. Recuperate i bagagli allo Yishang e partite verso l\'aeroporto DYG (~50-70 min). C\'è tempo con calma: presentatevi ~2h prima del volo.' },
           { time: '23:25', label: 'Volo FM9342 Zhangjiajie (DYG) → Shanghai (PVG) ✈️', note: 'Shanghai Airlines · 4 passeggeri · arrivo all\'1:35 della notte tra il 5 e il 6. Atterrate al Pudong (PVG), lo stesso aeroporto da cui ripartite l\'8.' },
         ],
-        tip: { title: 'Arrivo a tarda notte', text: 'Atterrate all\'1:35: a quell\'ora metro e Maglev non sono operativi, quindi prendete un taxi dal Pudong all\'hotel (~50 min, ~200 yuan). La prenotazione Atour parte dalla notte del 5, quindi la camera vi aspetta. Il 6 mattina dormite e partite con calma.' }
+        tip: { title: 'Arrivo a tarda notte', text: 'Atterrate all\'1:35: a quell\'ora metro e Maglev non sono operativi. Avete prenotato il transfer dell\'hotel (400 yuan, tariffa notturna) — comodo a quell\'ora. La prenotazione Atour parte dalla notte del 5, quindi la camera vi aspetta. Il 6 mattina dormite e partite con calma.' }
       },
     ]
   },
@@ -950,7 +950,7 @@ const CITIES = {
           { time: 'Pomeriggio', label: 'Yu Garden e Città Vecchia', note: 'Giardino classico Ming (1559): rocce, padiglioni, carpe koi. Intorno il bazar del Tempio del Dio della Città. Provate gli xiaolongbao (ravioli al vapore col brodo) da Nanxiang, dove sono nati.' },
           { time: 'Sera', label: 'Il Bund (Waitan) di notte 🌃', note: 'A pochi minuti a piedi dall\'hotel: 26 edifici coloniali affacciati sulla skyline futuristica di Pudong — Shanghai Tower (632 m, 2ª al mondo), Pearl Tower, Jin Mao — illuminata. Passeggiata sul lungofiume e cena. Opzionale: crociera serale sul fiume Huangpu (~40 min).' },
         ],
-        tip: { title: 'La metro di Shanghai', text: 'Tra le più estese al mondo (oltre 800 km). Usate Alipay/WeChat col QR, niente contanti. La Line 2 collega il centro al Pudong. Attenzione: di notte (dopo le ~22:30) non è attiva — per l\'arrivo dell\'1:35 serve il taxi.' }
+        tip: { title: 'La metro di Shanghai', text: 'Tra le più estese al mondo (oltre 800 km). Usate Alipay/WeChat col QR, niente contanti. La Line 2 collega il centro al Pudong. Attenzione: di notte (dopo le ~22:30) non è attiva — per l\'arrivo dell\'1:35 avete il transfer dell\'hotel (400 yuan).' }
       },
       {
         label: '7 ago', badge: 'Giornata piena', badgeKind: 'full',
@@ -969,13 +969,14 @@ const CITIES = {
         label: '8 ago', badge: 'Rientro', badgeKind: 'return',
         title: 'Ultimo giorno e volo per Milano',
         date: 'Sabato 8 agosto',
-        intro: 'Ultima giornata in Cina, con calma: ciò che non avete ancora visto, qualche acquisto, e poi il volo notturno verso casa.',
+        intro: 'Ultima giornata piena in Cina: il volo parte all\'1:30 della notte tra l\'8 e il 9, quindi avete tutto l\'8 a disposizione. Check-out a mezzogiorno, bagagli in hotel, e si gira fino a sera.',
         slots: [
           { time: 'Mattina', label: 'Ultimi angoli di Shanghai', note: 'A scelta: il Tempio di Jing\'an, il quartiere artistico di Tianzifang, l\'M50 art district o le ultime compere. Ritmo leggero dopo settimane intense.' },
-          { time: '12:30', label: 'Check-out (lasciate i bagagli in hotel)', note: 'Partenza dall\'hotel fino alle 12:30: fatevi tenere le valigie alla reception e continuate la giornata leggeri, le recuperate prima di andare in aeroporto.' },
-          { time: 'Opzione', label: 'Gita a Zhujiajiao o Suzhou (facoltativo)', note: 'Per un ultimo assaggio di "Cina classica" con canali e giardini: Zhujiajiao (borgo d\'acqua, ~1h) o Suzhou (giardini UNESCO, ~30 min in treno veloce). Solo se partite presto e con i bagagli già lasciati in hotel.' },
-          { time: 'Pomeriggio', label: 'Recupero bagagli e transfer al Pudong (PVG)', note: 'Dal centro ~50 min in taxi/metro, oppure il Maglev (7 min da Longyang Road). Per un volo internazionale presentatevi ~3h prima.' },
-          { time: 'Sera', label: 'Volo Shanghai PVG → Milano MXP ✈️', note: 'Fine di un viaggio straordinario: la capitale imperiale, la terracotta, i panda, le montagne di Avatar e la metropoli più moderna del mondo.' },
+          { time: '12:30', label: 'Check-out (lasciate i bagagli in hotel)', note: 'Partenza dall\'hotel fino alle 12:30: fatevi tenere le valigie alla reception e continuate la giornata leggeri, le recuperate in serata prima dell\'aeroporto.' },
+          { time: 'Pomeriggio', label: 'Opzione: gita a Zhujiajiao o Suzhou', note: 'Avendo tutto il giorno, ci sta un ultimo assaggio di "Cina classica" con canali e giardini: Zhujiajiao (borgo d\'acqua, ~1h) o Suzhou (giardini UNESCO, ~30 min in treno veloce). In alternativa, relax e ultimi quartieri di Shanghai.' },
+          { time: 'Sera', label: 'Cena d\'addio e ultimi acquisti', note: 'Ultima cena in Cina con calma — Xintiandi, la Concessione Francese o un rooftop con vista sul Bund. Poi rientro in hotel per i bagagli.' },
+          { time: '~22:00', label: 'Recupero bagagli e transfer al Pudong (PVG)', note: 'Dal centro ~50 min in taxi (a quest\'ora metro/Maglev verso il tardi non sono affidabili). Per un volo internazionale presentatevi ~3h prima: in aeroporto entro le 22:30.' },
+          { time: '01:30', label: 'Volo Air China PVG → Milano MXP ✈️', note: 'Conf. MTR7NH, biglietto 999-2425034642 · partenza 9 agosto ore 01:30, arrivo a Milano MXP ore 07:55. Fine di un viaggio straordinario: la capitale imperiale, la terracotta, i panda, le montagne di Avatar e la metropoli più moderna del mondo.' },
         ],
         tip: { title: 'Tornerete cambiati', text: 'Quasi tre settimane in Cina non è solo visitare posti: è confrontarsi con 5.000 anni di civiltà e una modernità che in alcuni settori ha superato l\'Occidente. I ragazzi torneranno con una prospettiva che nessuna scuola può dare. Buon viaggio!' }
       },
