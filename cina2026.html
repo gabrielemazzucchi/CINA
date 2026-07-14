@@ -407,10 +407,10 @@ body {
   <div class="home-hero">
     <div class="hero-eyebrow">Piano di Viaggio · Famiglia Mazzucchi</div>
     <h1 class="hero-title">Cina <em>2026</em></h1>
-    <p class="hero-sub">22 luglio – 9 agosto · 4 persone · 6 città</p>
+    <p class="hero-sub">22 luglio – 9 agosto · 4 persone · 5 città</p>
     <div class="hero-stats">
-      <div class="stat-card"><div class="stat-val">18</div><div class="stat-lbl">Giorni</div></div>
-      <div class="stat-card"><div class="stat-val">6</div><div class="stat-lbl">Città</div></div>
+      <div class="stat-card"><div class="stat-val">17</div><div class="stat-lbl">Giorni</div></div>
+      <div class="stat-card"><div class="stat-val">5</div><div class="stat-lbl">Città</div></div>
       <div class="stat-card"><div class="stat-val">4</div><div class="stat-lbl">Persone</div></div>
     </div>
   </div>
@@ -484,6 +484,7 @@ body {
     <div class="note-label">Trasferimenti</div>
     <div class="note-text">🌙 Pechino→Xi'an: <b>PRENOTATO ✓</b> (26/7 ore 20:42)<br>
     🚄 Xi'an→Chengdu: <b>PRENOTATO ✓</b> (G3139 · 30/7 ore 10:24)<br>
+    ✈ Chengdu→Zhangjiajie: <b>PRENOTATO ✓</b> (3U6781 · 2/8 ore 11:35 → 13:00)<br>
     ✈ Zhangjiajie→Shanghai: <b>PRENOTATO ✓</b> (FM9342 · 5/8 ore 23:25 → 01:35)</div>
   </div>
 
@@ -522,8 +523,8 @@ body {
     <div class="check-item">
       <div class="check-box"><span class="check-tick">✓</span></div>
       <div class="check-body">
-        <div class="check-label">Volo CTU → DYG (Chengdu→Zhangjiajie): PRENOTATO ✓</div>
-        <div class="check-meta">Sichuan Airlines 3U6781 · Prenotaz. 1381036012963276 · Codice QKB39P · 2/8 ore 11:35 → 13:00</div>
+        <div class="check-label">Volo TFU → DYG (Chengdu→Zhangjiajie): PRENOTATO ✓</div>
+        <div class="check-meta">Sichuan Airlines 3U6781 · TFU → DYG · Airbus A320 · Prenotaz. 1381036012963276 · Codice QKB39P · 2/8 ore 11:35 → 13:00</div>
       </div>
       <span class="urgency urgency-now">Ora</span>
     </div>
@@ -838,18 +839,23 @@ const CITIES = {
         tip: { title: 'Il pepe di Sichuan', text: 'Non è un vero pepe. Attiva i recettori del tatto prima di quelli del dolore, creando formicolio e intorpidimento. Fu vietato negli USA dal 1968 al 2005 per ragioni fitosanitarie. Oggi è il condimento cinese più esportato al mondo.' }
       },
       {
-        label: '31 lug', badge: 'Giornata piena', badgeKind: 'full',
-        title: 'Panda e Opera del Sichuan',
+        label: '31 lug', badge: 'Gita fuori porta', badgeKind: 'travel',
+        title: 'Dujiangyan: Panda Valley e ingegneria millenaria',
         date: 'Giovedì 31 luglio',
-        intro: 'Il giorno del panda. Ma c\'è un segreto: i panda sono attivi SOLO nelle prime ore del mattino. Arrivate all\'apertura o li trovate addormentati.',
+        intro: 'Gita di un giorno intero a Dujiangyan (~1h da Chengdu) con auto e autista privati: al mattino i panda della Panda Valley, nel pomeriggio il sistema idraulico UNESCO di 2.300 anni fa, la sera il giro notturno nella città antica di Guanxian. Rientro previsto per le 21:00.',
         slots: [
-          { time: '07:45', label: 'Taxi verso la Base di Ricerca dei Panda (30 min)', note: 'Prenotate il taxi la sera prima. Arrivare tra i primi 500 visitatori fa una differenza enorme.' },
-          { time: '08:00', label: 'Base di Ricerca Panda Giganti 🐼', note: 'I panda mangiano bambù solo 08:00-10:00. Dopo si addormentano. Inclusi anche i panda rossi (Ailurus fulgens) — altrettanto adorabili.' },
-          { time: 'Pranzo', label: 'Rientro in centro — pranzo', note: 'Mapo tofu: il piatto più famoso del Sichuan. Inventato nel XIX sec. da una donna anziana con il viso butterato ("mapo" = vecchia butterata).' },
-          { time: 'Pomeriggio', label: 'Tempio di Wenshu + Taikoo Li', note: 'Tempio buddhista (702 d.C.) con tea house nel cortile. Taikoo Li: il quartiere shopping più trendy di Chengdu integrato nell\'architettura storica.' },
-          { time: 'Sera', label: 'Opera del Sichuan — Bian Lian (cambio maschera) 🎭', note: 'Il performer cambia maschera in meno di un secondo. Tecnica segreta tramandata solo di padre in figlio maschio — nessuno sa ancora come funziona davvero.' },
+          { time: '07:50', label: 'Ritiro a Chengdu 🚐', note: 'Trasferimento in auto privata (~1h). Vi contattano entro le 19:00 del giorno prima per concordare l\'orario; pick-up a domicilio entro la 3ª circonvallazione e nel distretto high-tech.' },
+          { time: 'Mattina', label: 'Panda Valley (Valle dei Panda) 🐼', note: '~3h · Area semi-naturale nel verde di Dujiangyan: i panda giganti tra il bambù e i panda rossi. Al coperto, biglietto incluso. È la base di Dujiangyan, più tranquilla di quella cittadina di Chengdu.' },
+          { time: 'Pranzo', label: 'Pranzo libero', note: '~1h · A proprie spese, niente pranzo di gruppo: scelta autonoma. Potete farvi consigliare dall\'autista-guida.' },
+          { time: 'Pomeriggio', label: 'Sistema idraulico di Dujiangyan (都江堰) 💧', note: '~3h · Opera UNESCO fatta costruire da Li Bing nel 256 a.C. e ancora in funzione. Tappe: la Bocca di Pesce (diga divisoria), la Diga di Sabbia Volante, il Tempio Erwang (二王庙) e il Padiglione Yulei con vista dall\'alto.' },
+          { time: '', label: 'Torre Qinyan e Libreria Zhongshuge 📚', note: 'Salita alla Torre Qinyan per il panorama sull\'opera idraulica e sulla città antica; poi la libreria Zhongshuge, la «Hogwarts» di Dujiangyan, tra montagne di libri e specchi.' },
+          { time: '', label: 'Spettacolo dell\'Opera del Sichuan 🎭', note: '~30 min · Cambio faccia (bian lian), sputafuoco e la scena «Li Bing doma le acque». Ingresso gratuito, senza spinte all\'acquisto.' },
+          { time: 'Sera', label: 'Ponte del Sud e Piazza Yangtianwo', note: 'Il Nanqiao, ponte coperto illuminato sul Minjiang, e la gigantesca scultura del «panda sdraiato» in Piazza Yangtianwo: angolo fotografico imperdibile.' },
+          { time: '', label: 'Città antica di Guanxian e «Lacrime Blu» ✨', note: 'Vicoli illuminati da lanterne e snack locali nella città antica; poco distante il Tianfuyuan «Blue Tears», con i riflessi blu che danzano sul fiume di notte.' },
+          { time: 'Cena', label: 'Cena libera', note: '~1h · A proprie spese, nei pressi dell\'ingresso di Dujiangyan (zona Lacrime Blu / città antica): piatti tipici e specialità locali.' },
+          { time: '21:00', label: 'Rientro a Chengdu', note: 'Trasferimento fino alla 3ª circonvallazione.' },
         ],
-        tip: { title: 'Il Bian Lian', text: 'Tutelato dallo stato cinese come patrimonio immateriale. Nel 1987 vietato ufficialmente a stranieri e donne. Nel 2005 la prima donna praticante ottenne il diritto dopo una battaglia legale. Il segreto è ancora custodito.' }
+        tip: { title: 'Giornata lunga ma comoda', text: 'Tour privato «senza trappole»: stesso veicolo tutto il giorno, bagagli a bordo, nessuna sosta forzata per shopping. Portate acqua, cappello e scarpe comode, perché si cammina parecchio tra il mattino coi panda e la sera in città antica. Momenti clou: Panda Valley presto al mattino e il giro notturno di Guanxian.' }
       },
       {
         label: '1 ago', badge: 'Giornata piena', badgeKind: 'full',
@@ -878,13 +884,13 @@ const CITIES = {
         intro: 'Migliaia di colonne di quarzo-arenaria alte fino a 300 metri che emergono dalla foresta. James Cameron le visitò prima di Avatar — le "Montagne Fluttuanti" sono modellate esattamente su queste colonne.',
         slots: [
           { time: '09:30', label: 'Partenza per Aeroporto Chengdu Tianfu T2', note: 'Arrivate in aeroporto almeno 2 ore prima. Il Tianfu è il nuovo aeroporto internazionale di Chengdu — più lontano dal centro, calcolate 40-50 min di taxi/Didi.' },
-          { time: '11:35', label: 'Volo Sichuan Airlines 3U6781 — Chengdu Tianfu T2 → Zhangjiajie Hehua T2', note: 'Prenotaz. n. 1381036012963276 · Codice QKB39P · Economy · Bagaglio stiva 20 kg/persona. Durata ~1h25.' },
+          { time: '11:35', label: 'Volo Sichuan Airlines 3U6781 — Chengdu Tianfu T2 → Zhangjiajie Hehua T2', note: 'TFU → DYG · Airbus A320 · solo andata · Prenotaz. n. 1381036012963276 · Codice QKB39P · Economy · Bagaglio stiva 20 kg/persona. Durata ~1h25.' },
           { time: '13:00', label: 'Arrivo Aeroporto Zhangjiajie Hehua T2', note: 'L\'atterraggio tra le montagne è già spettacolare di per sé — specialmente con nuvole basse.' },
           { time: '13:45', label: 'Transfer verso Wulingyuan e check-in Yishang Hotel', note: 'Circa 40 min dall\'aeroporto. Yishang Hotel (Flag Store / 宜尚酒店), No. 333 Jundi Road, Wulingyuan — prenotato 2/5 agosto, base perfetta per il National Forest Park.' },
           { time: 'Pomeriggio', label: 'Baofeng Lake — giro in barca 🚣', note: 'A soli ~8 min dall\'hotel in Didi: inizio dolce dopo il volo. Lago verde smeraldo circondato da colonne altissime, barca di ~45 min nel silenzio tra le pareti. Al rientro comprate snack e acqua per i giorni nel parco.' },
           { time: 'Sera', label: 'Cena con cucina Hunan', note: 'Più acida e affumicata rispetto al Sichuan. Carne di maiale affumicata (腊肉), tofu puzzolente fritto (臭豆腐). Riposate — domani è intenso.' },
         ],
-        tip: { title: 'Volo confermato ✓', text: 'Sichuan Airlines 3U6781 · Prenotaz. 1381036012963276 · Codice QKB39P · 4 passeggeri · Economy · Bagaglio a mano 8 kg/persona, stiva 20 kg/persona.' }
+        tip: { title: 'Volo confermato ✓', text: 'Sichuan Airlines 3U6781 · TFU → DYG · Airbus A320 · Prenotaz. 1381036012963276 · Codice QKB39P · 4 passeggeri · Economy · Bagaglio a mano 8 kg/persona, stiva 20 kg/persona.' }
       },
       {
         label: '3 ago', badge: 'Giornata piena', badgeKind: 'full',
