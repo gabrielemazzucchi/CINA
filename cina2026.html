@@ -355,6 +355,20 @@ body {
 .urgency-soon { background: var(--orange-dim); color: var(--orange); }
 .urgency-later { background: var(--green-dim); color: var(--green); }
 
+/* Address cards (Indirizzi) */
+.addr-item {
+  padding: 12px 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+.addr-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.addr-tag { font-size: 11px; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+.addr-row { font-size: 12px; color: var(--muted); line-height: 1.55; }
+.addr-cn {
+  font-size: 14px; color: var(--text); line-height: 1.5; margin-top: 5px;
+  -webkit-user-select: text; user-select: text;
+}
+
 /* ══════════════════════════════════════
    BOTTOM NAV
 ══════════════════════════════════════ */
@@ -397,6 +411,10 @@ body {
   <div class="nav-tab" id="tab-checklist" data-view="checklist">
     <span class="nav-icon">✅</span>
     <span>Da fare</span>
+  </div>
+  <div class="nav-tab" id="tab-indirizzi" data-view="indirizzi">
+    <span class="nav-icon">🏨</span>
+    <span>Indirizzi</span>
   </div>
 </nav>
 
@@ -694,6 +712,111 @@ body {
       <span class="urgency urgency-now">Ora</span>
     </div>
 
+  </div>
+
+  <div style="height: 80px"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     INDIRIZZI (taxi / Didi)
+══════════════════════════════════════ -->
+<div id="view-indirizzi" class="view">
+  <div class="checklist-topbar">
+    <div class="status-bar"></div>
+    <div class="checklist-title">Indirizzi</div>
+    <div class="checklist-sub">Da mostrare al tassista o incollare in Didi · tieni premuto sul testo cinese per copiarlo</div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="group-title">🏨 Hotel</div>
+
+    <div class="addr-item">
+      <div class="addr-name">Legendale Hotel Beijing</div>
+      <div class="addr-tag">Pechino · 23–26 lug</div>
+      <div class="addr-row">No. 90-92 Jinbao Street, Dongcheng District</div>
+      <div class="addr-cn">北京励骏酒店 · 北京市东城区金宝街90-92号</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Nanfeng Hotel (Zhonggulou · Huimin Street)</div>
+      <div class="addr-tag">Xi'an · 27–30 lug · vicino Torre Campana / quartiere musulmano</div>
+      <div class="addr-row">Unit 1, Building 1, No. 18 West Bangzishi Street, Lianhu District</div>
+      <div class="addr-cn">西安钟鼓楼回民街南丰酒店 · 西安市莲湖区西梆子市街18号</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Holiday Inn Express Chengdu Tianfu Square</div>
+      <div class="addr-tag">Chengdu · 30 lug – 2 ago</div>
+      <div class="addr-row">No. 52 Jindun Road, Qingyang District</div>
+      <div class="addr-cn">成都天府广场智选假日酒店 · 成都市青羊区金盾路52号</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Yishang Hotel (Wulingyuan)</div>
+      <div class="addr-tag">Zhangjiajie · 2–5 ago · Forest Park</div>
+      <div class="addr-row">No. 333 Jundi Road, Jundiping Subdistrict, Wulingyuan District</div>
+      <div class="addr-cn">宜尚酒店(武陵源店) · 张家界市武陵源区军地坪街道军邸路333号</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Atour Hotel Nanjing East Road — Shanghai Bund</div>
+      <div class="addr-tag">Shanghai · 5–8 ago · a 3 min dal Bund</div>
+      <div class="addr-row">No. 105-1 Fuzhou Road, Huangpu District</div>
+      <div class="addr-cn">上海外滩南京东路亚朵酒店 · 上海市黄浦区福州路105-1号</div>
+    </div>
+  </div>
+
+  <div class="checklist-group">
+    <div class="group-title">🚉 Stazioni & aeroporti</div>
+
+    <div class="addr-item">
+      <div class="addr-name">Aeroporto Pechino Capital (PEK) · Terminal 3</div>
+      <div class="addr-tag">Arrivo 23 lug · dal volo da Milano</div>
+      <div class="addr-row">Beijing Capital International Airport, Terminal 3, Shunyi District, Beijing</div>
+      <div class="addr-cn">北京首都国际机场 T3 · 北京市顺义区</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Stazione Pechino Ovest (Beijingxi)</div>
+      <div class="addr-tag">Partenza treno notturno · 26 lug 20:42</div>
+      <div class="addr-row">Beijing West Railway Station, No. 118 Lianhuachi East Road, Fengtai District, Beijing</div>
+      <div class="addr-cn">北京西站 · 北京市丰台区莲花池东路118号</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Stazione Xi'an Nord (Xi'anbei)</div>
+      <div class="addr-tag">Arrivo 27 lug · Partenza treno 30 lug 10:24</div>
+      <div class="addr-row">Xi'an North Railway Station, Weiyang District, Xi'an</div>
+      <div class="addr-cn">西安北站 · 西安市未央区</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Stazione Chengdu Est (Chengdudong)</div>
+      <div class="addr-tag">Arrivo 30 lug 13:53</div>
+      <div class="addr-row">Chengdu East Railway Station, Chenghua District, Chengdu</div>
+      <div class="addr-cn">成都东站 · 成都市成华区</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Aeroporto Chengdu Tianfu (TFU) · Terminal 2</div>
+      <div class="addr-tag">Partenza volo 3U6781 · 2 ago 11:35</div>
+      <div class="addr-row">Chengdu Tianfu International Airport, Terminal 2, Jianyang, Chengdu</div>
+      <div class="addr-cn">成都天府国际机场 T2 · 成都市简阳市</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Aeroporto Zhangjiajie Hehua (DYG)</div>
+      <div class="addr-tag">Arrivo 2 ago · Partenza volo FM9342 · 5 ago 23:25</div>
+      <div class="addr-row">Zhangjiajie Hehua International Airport, Yongding District, Zhangjiajie</div>
+      <div class="addr-cn">张家界荷花国际机场 · 张家界市永定区</div>
+    </div>
+
+    <div class="addr-item">
+      <div class="addr-name">Aeroporto Shanghai Pudong (PVG)</div>
+      <div class="addr-tag">Arrivo 6 ago · Partenza volo per Milano 9 ago 01:30</div>
+      <div class="addr-row">Shanghai Pudong International Airport, Pudong New Area, Shanghai</div>
+      <div class="addr-cn">上海浦东国际机场 · 上海市浦东新区</div>
+    </div>
   </div>
 
   <div style="height: 80px"></div>
