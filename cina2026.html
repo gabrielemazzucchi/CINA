@@ -357,9 +357,17 @@ body {
 
 /* Address cards (Indirizzi) */
 .addr-item {
-  padding: 12px 14px; background: var(--surface);
+  position: relative; cursor: pointer;
+  padding: 12px 38px 12px 14px; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--radius-sm);
   margin-bottom: 8px;
+  transition: border-color .15s, background .15s, transform .1s;
+}
+.addr-item:hover { border-color: var(--border2); background: var(--surface2); }
+.addr-item:active { transform: scale(.99); }
+.addr-item::after {
+  content: "›"; position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%); color: var(--muted); font-size: 20px; line-height: 1;
 }
 .addr-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
 .addr-tag { font-size: 11px; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
@@ -368,6 +376,54 @@ body {
   font-size: 14px; color: var(--text); line-height: 1.5; margin-top: 5px;
   -webkit-user-select: text; user-select: text;
 }
+
+/* Popup indirizzi (mappa + azioni) */
+.addr-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.66);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 200;
+}
+.addr-overlay.open { opacity: 1; pointer-events: auto; }
+.addr-sheet {
+  position: relative; background: var(--surface); width: 100%; max-width: 460px;
+  border-radius: 20px 20px 0 0; border-top: 1px solid var(--border2);
+  padding: 10px 18px calc(22px + var(--safe-bottom));
+  transform: translateY(100%); transition: transform .26s cubic-bezier(.22,1,.36,1);
+  max-height: 90vh; overflow-y: auto;
+}
+.addr-overlay.open .addr-sheet { transform: translateY(0); }
+.addr-grabber { width: 38px; height: 4px; border-radius: 2px; background: var(--border2); margin: 4px auto 14px; }
+.addr-close {
+  position: absolute; top: 14px; right: 16px; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--surface2); border: 1px solid var(--border); color: var(--muted);
+  font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2;
+}
+.addr-m-name { font-family: var(--font-display); font-size: 21px; font-weight: 600; line-height: 1.25; color: var(--text); padding-right: 34px; margin-bottom: 3px; }
+.addr-m-tag { font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: 14px; }
+.addr-m-map { width: 100%; height: 210px; border: 0; border-radius: var(--radius); background: var(--surface2); margin-bottom: 16px; display: block; }
+.addr-m-lbl { font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.addr-m-en { font-size: 17px; color: var(--text); line-height: 1.45; margin-bottom: 8px; font-weight: 500; }
+.addr-m-cn {
+  font-size: 22px; color: var(--text); line-height: 1.5; -webkit-user-select: text; user-select: text;
+  padding: 12px 14px; background: var(--surface2); border-radius: var(--radius-sm);
+  border: 1px solid var(--border); margin-bottom: 18px;
+}
+.addr-btn-row { display: flex; gap: 9px; flex-wrap: wrap; }
+.addr-btn {
+  flex: 1; min-width: 96px; text-decoration: none; text-align: center; font-size: 13px; font-weight: 600;
+  padding: 13px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border2);
+  color: var(--text); background: var(--surface2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-body);
+}
+.addr-btn.primary { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.addr-m-foot { font-size: 11px; color: var(--muted); margin-top: 14px; line-height: 1.5; text-align: center; }
+.addr-toast {
+  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--green); color: #0d0f14; font-weight: 600; font-size: 13px;
+  padding: 10px 18px; border-radius: 20px; opacity: 0; pointer-events: none; transition: all .25s; z-index: 210;
+}
+.addr-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ══════════════════════════════════════
    BOTTOM NAV
@@ -730,35 +786,35 @@ body {
   <div class="checklist-group">
     <div class="group-title">🏨 Hotel</div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="39.9152" data-lon="116.4181">
       <div class="addr-name">Legendale Hotel Beijing</div>
       <div class="addr-tag">Pechino · 23–26 lug</div>
       <div class="addr-row">No. 90-92 Jinbao Street, Dongcheng District</div>
       <div class="addr-cn">北京励骏酒店 · 北京市东城区金宝街90-92号</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="34.2588" data-lon="108.938">
       <div class="addr-name">Nanfeng Hotel (Zhonggulou · Huimin Street)</div>
       <div class="addr-tag">Xi'an · 27–30 lug · vicino Torre Campana / quartiere musulmano</div>
       <div class="addr-row">Unit 1, Building 1, No. 18 West Bangzishi Street, Lianhu District</div>
       <div class="addr-cn">西安钟鼓楼回民街南丰酒店 · 西安市莲湖区西梆子市街18号</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="30.6656" data-lon="104.049">
       <div class="addr-name">Holiday Inn Express Chengdu Tianfu Square</div>
       <div class="addr-tag">Chengdu · 30 lug – 2 ago</div>
       <div class="addr-row">No. 52 Jindun Road, Qingyang District</div>
       <div class="addr-cn">成都天府广场智选假日酒店 · 成都市青羊区金盾路52号</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="29.3455" data-lon="110.5513">
       <div class="addr-name">Yishang Hotel (Wulingyuan)</div>
       <div class="addr-tag">Zhangjiajie · 2–5 ago · Forest Park</div>
       <div class="addr-row">No. 333 Jundi Road, Jundiping Subdistrict, Wulingyuan District</div>
       <div class="addr-cn">宜尚酒店(武陵源店) · 张家界市武陵源区军地坪街道军邸路333号</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="31.2377" data-lon="121.4855">
       <div class="addr-name">Atour Hotel Nanjing East Road — Shanghai Bund</div>
       <div class="addr-tag">Shanghai · 5–8 ago · a 3 min dal Bund</div>
       <div class="addr-row">No. 105-1 Fuzhou Road, Huangpu District</div>
@@ -769,49 +825,49 @@ body {
   <div class="checklist-group">
     <div class="group-title">🚉 Stazioni & aeroporti</div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="40.0521" data-lon="116.61">
       <div class="addr-name">Aeroporto Pechino Capital (PEK) · Terminal 3</div>
       <div class="addr-tag">Arrivo 23 lug · dal volo da Milano</div>
       <div class="addr-row">Beijing Capital International Airport, Terminal 3, Shunyi District, Beijing</div>
       <div class="addr-cn">北京首都国际机场 T3 · 北京市顺义区</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="39.8949" data-lon="116.322">
       <div class="addr-name">Stazione Pechino Ovest (Beijingxi)</div>
       <div class="addr-tag">Partenza treno notturno · 26 lug 20:42</div>
       <div class="addr-row">Beijing West Railway Station, No. 118 Lianhuachi East Road, Fengtai District, Beijing</div>
       <div class="addr-cn">北京西站 · 北京市丰台区莲花池东路118号</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="34.3757" data-lon="108.946">
       <div class="addr-name">Stazione Xi'an Nord (Xi'anbei)</div>
       <div class="addr-tag">Arrivo 27 lug · Partenza treno 30 lug 10:24</div>
       <div class="addr-row">Xi'an North Railway Station, Weiyang District, Xi'an</div>
       <div class="addr-cn">西安北站 · 西安市未央区</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="30.6303" data-lon="104.1418">
       <div class="addr-name">Stazione Chengdu Est (Chengdudong)</div>
       <div class="addr-tag">Arrivo 30 lug 13:53</div>
       <div class="addr-row">Chengdu East Railway Station, Chenghua District, Chengdu</div>
       <div class="addr-cn">成都东站 · 成都市成华区</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="30.3125" data-lon="104.4414">
       <div class="addr-name">Aeroporto Chengdu Tianfu (TFU) · Terminal 2</div>
       <div class="addr-tag">Partenza volo 3U6781 · 2 ago 11:35</div>
       <div class="addr-row">Chengdu Tianfu International Airport, Terminal 2, Jianyang, Chengdu</div>
       <div class="addr-cn">成都天府国际机场 T2 · 成都市简阳市</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="29.1028" data-lon="110.4457">
       <div class="addr-name">Aeroporto Zhangjiajie Hehua (DYG)</div>
       <div class="addr-tag">Arrivo 2 ago · Partenza volo FM9342 · 5 ago 23:25</div>
       <div class="addr-row">Zhangjiajie Hehua International Airport, Yongding District, Zhangjiajie</div>
       <div class="addr-cn">张家界荷花国际机场 · 张家界市永定区</div>
     </div>
 
-    <div class="addr-item">
+    <div class="addr-item" data-lat="31.1443" data-lon="121.8083">
       <div class="addr-name">Aeroporto Shanghai Pudong (PVG)</div>
       <div class="addr-tag">Arrivo 6 ago · Partenza volo per Milano 9 ago 01:30</div>
       <div class="addr-row">Shanghai Pudong International Airport, Pudong New Area, Shanghai</div>
@@ -821,6 +877,28 @@ body {
 
   <div style="height: 80px"></div>
 </div>
+
+<!-- popup indirizzi (mappa + azioni) -->
+<div class="addr-overlay" id="addrOverlay">
+  <div class="addr-sheet">
+    <div class="addr-close" id="addrClose">✕</div>
+    <div class="addr-grabber"></div>
+    <div class="addr-m-name" id="addrName"></div>
+    <div class="addr-m-tag" id="addrTag"></div>
+    <iframe class="addr-m-map" id="addrMap" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa"></iframe>
+    <div class="addr-m-lbl">Indirizzo</div>
+    <div class="addr-m-en" id="addrEn"></div>
+    <div class="addr-m-cn" id="addrCn"></div>
+    <div class="addr-btn-row">
+      <a class="addr-btn primary" id="addrApple" target="_blank" rel="noopener">🍎 Mappe</a>
+      <a class="addr-btn" id="addrAmap" target="_blank" rel="noopener">🧭 Amap</a>
+      <a class="addr-btn" id="addrGoogle" target="_blank" rel="noopener">🗺️ Google</a>
+      <button class="addr-btn" id="addrCopy">📋 Copia 🇨🇳</button>
+    </div>
+    <div class="addr-m-foot">In Cina «Mappe» di Apple e Amap funzionano senza VPN. Tieni premuto sul testo cinese per copiarlo.</div>
+  </div>
+</div>
+<div class="addr-toast" id="addrToast">Indirizzo copiato ✓</div>
 
 <!-- ══════════════════════════════════════
      DATA
@@ -1307,6 +1385,51 @@ window.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   }
 });
+
+// ---- Popup indirizzi: mappa incorporata + apri in app + copia ----
+(function(){
+  var ov = document.getElementById('addrOverlay');
+  if (!ov) return;
+  function txt(el, sel){ var n = el.querySelector(sel); return n ? n.textContent : ''; }
+  function openAddr(item){
+    var name = txt(item, '.addr-name');
+    var tag  = txt(item, '.addr-tag');
+    var en   = txt(item, '.addr-row');
+    var cn   = txt(item, '.addr-cn');
+    var lat  = parseFloat(item.getAttribute('data-lat'));
+    var lon  = parseFloat(item.getAttribute('data-lon'));
+    var cnName = cn.split(' · ')[0];
+    document.getElementById('addrName').textContent = name;
+    document.getElementById('addrTag').textContent = tag;
+    var enBox = document.getElementById('addrEn');
+    enBox.textContent = en; enBox.style.display = en ? 'block' : 'none';
+    document.getElementById('addrCn').textContent = cn;
+    var bbox = [lon-0.008, lat-0.005, lon+0.008, lat+0.005].join('%2C');
+    document.getElementById('addrMap').src =
+      'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox + '&layer=mapnik&marker=' + lat + '%2C' + lon;
+    var q = encodeURIComponent(cnName);
+    document.getElementById('addrApple').href  = 'https://maps.apple.com/?q=' + q;
+    document.getElementById('addrAmap').href   = 'https://uri.amap.com/search?keyword=' + q + '&src=cina2026&coordinate=gaode&callnative=1';
+    document.getElementById('addrGoogle').href = 'https://www.google.com/maps/search/?api=1&query=' + q;
+    ov.classList.add('open');
+  }
+  function closeAddr(){
+    ov.classList.remove('open');
+    setTimeout(function(){ document.getElementById('addrMap').src = ''; }, 260);
+  }
+  var cards = document.querySelectorAll('#view-indirizzi .addr-item');
+  for (var i=0; i<cards.length; i++){
+    cards[i].addEventListener('click', (function(c){ return function(){ openAddr(c); }; })(cards[i]));
+  }
+  document.getElementById('addrClose').addEventListener('click', closeAddr);
+  ov.addEventListener('click', function(e){ if (e.target === ov) closeAddr(); });
+  document.getElementById('addrCopy').addEventListener('click', async function(){
+    var cn = document.getElementById('addrCn').textContent;
+    try { await navigator.clipboard.writeText(cn); } catch(e) {}
+    var t = document.getElementById('addrToast');
+    t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 1600);
+  });
+})();
 </script>
 </body>
 </html>
